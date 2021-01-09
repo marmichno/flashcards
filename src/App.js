@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useState} from 'react'
+import {HomePage} from './HomePage/HomePage';
+import {Nav} from './Navbar/Nav';
+import {ShowCategories} from './ModifyFlashcards/ShowCategories';
+import {ShowFlashcards} from './ModifyFlashcards/ManageFlashcards/ShowFlashcards';
+import {Register} from './Register/Register';
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    return(
+        <Router>
+          <Nav/>
+          <Switch>
+            <Route path="/" exact component={HomePage}/>
+            <Route path="/editCategories" component={ShowCategories}/>
+            <Route path="/editFlashcards" component={ShowFlashcards}/>
+            <Route path="/register" component={Register}/>
+          </Switch>
+        </Router>
+          )
 }
 
 export default App;

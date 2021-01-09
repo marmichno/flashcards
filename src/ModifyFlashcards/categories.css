@@ -1,0 +1,299 @@
+.categoriesMainContainer{
+    width:100vw;
+    height:92.35vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    overflow:hidden;
+    background-color:#242582;
+}
+
+.categoriesContainer{
+    width:100%;
+    height:60%;
+}
+
+.carousel{
+    height:50%;
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+    box-shadow: 6px 0px 20px -2px rgba(0,0,0,0.75);
+}
+
+.categoriesCarousel{
+    width:80%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+    transform:translateX(150%);
+    overflow:hidden;
+}
+
+.category{
+    border:solid;
+    width:17%;
+    height:60%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    border: 1px solid #F64C72;
+    font-size:1.1rem;
+    text-align:center;
+    cursor:pointer;
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    transition:all 0.2s;
+}
+
+.category:hover{
+    transform:scale(1.1);
+}
+
+
+    .slideFromRight{
+        animation:slideFromRight 1.3s ease-in-out forwards;
+    }
+
+    @keyframes slideFromRight{
+        from{transform: translateX(150%);}
+        to{transform: translateX(0%);}
+    }
+
+.categoryPreviewContainer{
+    height:40%;
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow: 6px 0px 20px -2px rgba(0,0,0,0.75);
+}
+
+.editCategoryContainer{
+    display:flex;
+    height:65%;
+    width:40%;
+    position:relative;
+    box-shadow: 3px 9px 60px -8px rgba(0,0,0,0.75);
+}
+
+.categoryPreview{
+    height:100%;
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background-color:#090b33;
+    color:white;
+}
+
+.categoryButtons{
+    height:100%;
+    width:15%;
+    display:grid;
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.categoryButtons div{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+
+.categoryModify{
+    background-color:yellow;
+}
+
+.categoryModifyInput{
+    position:absolute;
+    background-color:#1e2057;
+    width:100% !important;
+    height:20% !important;
+    left:0;
+    bottom:-20%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.categoryModifyInputContainer{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+}
+
+.categoryModifyInputContainer input{
+    background-color:transparent;
+    outline-style:none;
+    font-size:1.05rem;
+    border:1px solid;
+    margin-right:2rem;
+    height:70%;
+    text-align:center;
+    color:white;
+}
+
+.categoryModifyInputContainer div{
+    transition:all 0.5s;
+}
+
+.categoryModifyInputContainer div:hover{
+    color:#F64C72;
+    transform:scale(1.1);
+    cursor:pointer;
+}
+
+/* delete category */
+
+.categoryDeleteContainer{
+    height:100%;
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:row;
+    transition:all 0.5s;
+}
+
+.categoryDelete{
+    height:100%;
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+}
+
+.deleteCategoryIcon{
+    background-image:url('/src/icons/paper-bin.png');
+    background-position:center;
+    background-repeat:no-repeat;
+    width:20%;
+    height:30%;
+}
+
+.categoryDeleteContainer:hover{
+    transform:scale(1.1);
+    cursor:pointer;
+}
+/* category flashcards */
+
+.categoryFlashcards{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    transition:all 0.5s;
+}
+
+.categoryFlashcards:hover{
+    transform:scale(1.1);
+    cursor:pointer;
+}
+
+a{
+    text-decoration: none !important;
+}
+
+/* showCategoryIcon */
+
+.categoryShowFlashcards{
+    width:100%;
+    height:100%;
+    margin-right:5rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.categoryFlashcardsIcon{
+    background-image:url('/src/icons/poem.png');
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+    width:20%;
+    height:25%;
+    margin-top:1rem;
+    margin-bottom:0.5rem;
+}
+
+/* category form */
+
+.addCategory{
+    width:100%;
+    height:50%;
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+}
+
+.categoryForm{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    overflow:hidden;
+    box-shadow: inset 10px 10px 79px -16px rgba(0,0,0,0.75);
+}
+
+.addIconCategory{
+    background-image:url('/src//icons/save.png');
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+    border:none !important;
+    padding:0.8rem;
+    width:10%;
+    height:10%;
+    cursor:pointer;
+}
+
+.categoryForm .formContainer input:focus + .label-name .contentName, 
+.categoryForm .formContainer input:valid + .label-name .contentName{
+    transform: translateY(-120%);
+}
+
+.categoryForm .formContainer input:focus + .label-name::after, .formContainer input:valid + .label-name::after{
+    transform:translateX(0%);
+}
+
+/* edit category */
+
+.editCategoryContainer{
+    border:1px solid #F64C72;
+}
+
+/* arrows */
+.categoryCarouselArrow{
+    width:10%;
+    height:30%;
+    background-size:contain;
+    background-repeat:no-repeat;
+    cursor:pointer;
+    background-position:center;
+    transition: all 0.2s;
+}
+
+.categoryCarouselArrow:hover{
+    transform:scale(1.2);
+}
+
+.arrowLeft{
+    background-image:url('/src/icons/arrowLeft.png');
+}
+
+.arrowRight{
+    background-image:url('/src/icons/arrowRight.png');
+}

@@ -1,0 +1,30 @@
+nav{
+    position:sticky;
+    top:0;
+    min-height:7.5vh;
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background-color:#2F2FA2;
+    color:white;
+    border-bottom:1px solid #F64C72;
+}
+ul{
+    display:flex;
+    justify-content:space-around;
+    width:65%;
+}
+
+ul li{
+    text-decoration:none;
+    list-style:none;
+    padding:1rem;
+    color:white;
+    font-size:1.3rem;
+}
+
+a li{
+    color:white;
+    font-size:1.3rem;
+}
