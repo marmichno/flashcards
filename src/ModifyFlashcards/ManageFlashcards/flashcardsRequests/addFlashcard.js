@@ -1,6 +1,6 @@
 export const addFlashcard = async (firstSentence, secondSentence, categoryId) =>{
     var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", `Basic ` + localStorage.getItem('user'));
 
     var raw = JSON.stringify({"firstSentence":firstSentence,"secondSentence":secondSentence,"flashcardCategoryId":categoryId});
 

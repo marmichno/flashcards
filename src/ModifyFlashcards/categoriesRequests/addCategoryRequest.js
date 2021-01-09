@@ -1,7 +1,6 @@
 export const addCategoryRequest = async (category) =>{
         let myHeaders = new Headers();
-    
-        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Authorization", `Basic ` + localStorage.getItem('user'));
     
         var raw = JSON.stringify(category);
     

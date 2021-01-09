@@ -1,6 +1,10 @@
 export const deleteSentence = async (id) => {
+    let myHeaders = new Headers();
+    myHeaders.append("Authorization", `Basic ` + localStorage.getItem('user'));
+
     var requestOptions = {
         method: 'DELETE',
+        headers: myHeaders,
         redirect: 'follow'
       };
       

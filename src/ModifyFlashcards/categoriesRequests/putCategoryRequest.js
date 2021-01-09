@@ -1,6 +1,6 @@
 export const putCategoryRequest = async (id, categoryName) => {
     var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", `Basic ` + localStorage.getItem('user'));
 
     var raw = JSON.stringify(`${categoryName}`);
 

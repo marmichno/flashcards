@@ -1,7 +1,6 @@
 export const getCategoriesRequest = async () => {
-
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization", `Basic ' + base64.encode('swagswag' + ":" + 'swagswag')`);
+    let myHeaders = new Headers();
+    myHeaders.append("Authorization", `Basic ` + localStorage.getItem('user'));
 
     var requestOptions = {
         method: 'GET',
@@ -11,5 +10,7 @@ export const getCategoriesRequest = async () => {
     
     let request = await fetch("http://localhost:8080/api/categories", requestOptions);
     let response = await request.json();
+
+    console.log(response);
     return response;
 }

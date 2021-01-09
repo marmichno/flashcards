@@ -1,6 +1,8 @@
-export const loginRequest = (login, password) => {
+export const loginRequest = async (login, password) => {
     var myHeaders = new Headers();
-    myHeaders.append("Authorization", `Basic ' + base64.encode(${login} + ":" + ${password})`);
+    myHeaders.append("Authorization", `Basic ` + btoa(login + ":" + password));
+
+    console.log(myHeaders);
 
 
     var requestOptions = {
@@ -9,5 +11,12 @@ export const loginRequest = (login, password) => {
     redirect: 'follow'
     };
 
-    fetch("http://localhost:8080/api/userinfo", requestOptions);
+    let response = await fetch("http://localhost:8080/api/userinfo", requestOptions);
+
+    console.log(response);
+
+    if(response.status === 200){
+        let headers = btoa(login + ":" + password);
+        localStorage.setItem('user', headers);
+    }
 }

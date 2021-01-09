@@ -1,7 +1,11 @@
 export const getFlashcards = async(categoryIndex) =>{
 
+    let myHeaders = new Headers();
+    myHeaders.append("Authorization", `Basic ` + localStorage.getItem('user'));
+
         var requestOptions = {
             method: 'GET',
+            headers: myHeaders,
             redirect: 'follow'
           };
           

@@ -1,6 +1,6 @@
 export const putFlashcard = async (firstSentence, secondSentence, id) => {
     var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", `Basic ` + localStorage.getItem('user'));
 
     var raw = JSON.stringify({"firstSentence":firstSentence,"secondSentence":secondSentence});
 
