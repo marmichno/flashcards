@@ -80,3 +80,8 @@
 .registerIconOverflow .addIcon:hover{
     transform:scale(1.1);
 }
+
+.registerForm .error{
+    width: 50%;
+    text-align:center;
+}

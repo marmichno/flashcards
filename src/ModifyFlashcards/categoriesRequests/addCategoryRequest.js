@@ -1,6 +1,7 @@
 export const addCategoryRequest = async (category) =>{
         let myHeaders = new Headers();
         myHeaders.append("Authorization", `Basic ` + localStorage.getItem('user'));
+        myHeaders.append("Content-Type", "application/json");
     
         var raw = JSON.stringify(category);
     
@@ -13,4 +14,6 @@ export const addCategoryRequest = async (category) =>{
     
         let request = await fetch("http://localhost:8080/api/category", requestOptions);
         let response = await request;
+
+        return response;
 }

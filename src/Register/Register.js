@@ -7,6 +7,8 @@ export const Register = () => {
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
     const [repeatPassword, setRepeatPassword] = useState("");
+    const [errorStatus, setErrorStatus] = useState("");
+    const [successRegister, setSuccesRegister] = useState("");
 
         //login
         const saveLogin = (e) => {
@@ -23,8 +25,26 @@ export const Register = () => {
             setRepeatPassword(e.target.value);
         }
 
-        const addUser = () => {
-            registerUser(login, password);
+        const addUser = async () => {
+
+            if(password !== repeatPassword){
+                setErrorStatus("Passwords does not match");
+            }else{
+
+                let response = await registerUser(login, password);
+                
+                if(response.status === 409){
+                    setErrorStatus("User with this login already exists");
+                }else if(response.status === 400){
+                    setErrorStatus("Login and password has to be at least 5 symbols long and cant be longer than 20 symbols");
+                }else if(response.status === 200){
+                    setSuccesRegister("Account has been created, you may login now");
+                    setTimeout(() =>{
+                        window.location = "/"
+                    }, 1000);
+                }
+
+            }
         }
 
 
@@ -55,6 +75,8 @@ export const Register = () => {
                         <span className="contentName"><p>Repeat password</p></span>
                     </label>
                 </div>
+                <p className="error">{`${errorStatus}`}</p>
+                <p className="success">{`${successRegister}`}</p>
             </div>
 
                 <div className="registerIconContainer">

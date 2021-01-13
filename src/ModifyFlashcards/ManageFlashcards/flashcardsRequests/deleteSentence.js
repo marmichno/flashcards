@@ -1,6 +1,7 @@
 export const deleteSentence = async (id) => {
     let myHeaders = new Headers();
     myHeaders.append("Authorization", `Basic ` + localStorage.getItem('user'));
+    myHeaders.append("Content-Type", "application/json");
 
     var requestOptions = {
         method: 'DELETE',

@@ -5,8 +5,19 @@ import {ShowCategories} from './ModifyFlashcards/ShowCategories';
 import {ShowFlashcards} from './ModifyFlashcards/ManageFlashcards/ShowFlashcards';
 import {Register} from './Register/Register';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import {useSelector, useDispatch} from 'react-redux';
+import {login} from './actions';
+import {logout} from './actions';
 
 function App() {
+
+  const loginState = useSelector(state => state.isLogged);
+  const dispatch = useDispatch();
+  let isUserLoggedIn = localStorage.getItem('user');
+
+  if(isUserLoggedIn !== null){
+    dispatch(login())
+  }
 
     return(
         <Router>
@@ -19,6 +30,6 @@ function App() {
           </Switch>
         </Router>
           )
-}
+  }
 
 export default App;

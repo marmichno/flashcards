@@ -6,10 +6,13 @@ export const Categories = ({flashCardsCategories, saveCategoryIndex}) => {
 
     const [carousel, setCarousel] = useState(0);
 
+
     let backgroundColors = ['#252668', '#1c1e69', '#191c66', '#3339ce', '#2025b1', '#3a3eb3'];
 
     let flashcardsCategoriesArray = [[]];
     let x = 0;
+
+    
 
     flashCardsCategories.map((value, index) => {
         if(index % 5 === 0 && index != 0){
@@ -21,7 +24,6 @@ export const Categories = ({flashCardsCategories, saveCategoryIndex}) => {
         }
     })
 
-    console.log(flashcardsCategoriesArray);
 
     const carouselNext = (e) =>{
 
@@ -31,32 +33,45 @@ export const Categories = ({flashCardsCategories, saveCategoryIndex}) => {
             if(carousel === 0){
                 return;
             }else{
-                setCarousel(carousel - 1);
+                let divs = document.querySelector(".categoriesCarousel");
+                divs.classList.add('goDown');
+                setTimeout(() => {
+                    setCarousel(carousel - 1);
+                }, 400);
             }
         }else if(direction === "right"){
             if(carousel === flashcardsCategoriesArray.length - 1){
                 return
             }else{
-                setCarousel(carousel + 1);
+                let divs = document.querySelector(".categoriesCarousel");
+                divs.classList.add('goDown');
+                setTimeout(() => {
+                    setCarousel(carousel + 1);
+                }, 400);
+                
             }
         }
     }
 
-    useEffect(() => {
-        console.log(carousel);
-    }, [carousel])
+    if(flashcardsCategoriesArray[carousel] === undefined){
+        setCarousel(carousel - 1);
+    };
 
+    if(flashcardsCategoriesArray[carousel] !== undefined){
     return(
         <>
         <div className="categoryCarouselArrow arrowLeft" data-direction="left" onClick={carouselNext}></div>
             <div key={carousel} className="categoriesCarousel slideFromRight"> 
                 {
                 flashcardsCategoriesArray[carousel].map((value, index) => {
-                    return <div onClick={saveCategoryIndex} style={{backgroundColor: backgroundColors[index]}} className="category" data-index={value.id}><p>{value.categoryName}</p></div>
+                    return <div onClick={saveCategoryIndex} className="category" data-index={value.id}><p data-index={value.id}>{value.categoryName}</p></div>
                 })
                 }
             </div>
         <div className="categoryCarouselArrow arrowRight" data-direction="right" onClick={carouselNext}></div>
         </>
     )
+    }else{
+        return null;
+    }
 }

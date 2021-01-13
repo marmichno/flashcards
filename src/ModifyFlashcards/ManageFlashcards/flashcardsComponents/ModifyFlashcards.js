@@ -1,12 +1,12 @@
 import {putFlashcard} from '../flashcardsRequests/putFlashcard';
-import {useState, useEffect, useRef} from 'react';
+import {useState, useEffect} from 'react';
 
 export const ModifyFlashcards = ({refreshFlashcards, flashcardId, flashcardFirst, flashcardSecond, showInputs}) => {
 
     const [modifySentenceOne, setModifySentenceOne] = useState("");
     const [modifySentenceTwo, setModifySentenceTwo] = useState("");
-    const [flag, setFlag] = useState(false);
-    const modifyInputsRef = useRef(null);
+    const [modifyCategory, setModifyCategory] = useState("");
+
 
     // saving input text to add new flashcard
     const sentenceOne = (e) => {
@@ -18,6 +18,10 @@ export const ModifyFlashcards = ({refreshFlashcards, flashcardId, flashcardFirst
         setModifySentenceTwo(e.target.value);
     }
 
+    const saveCategory = (e) =>{
+        setModifyCategory(e.target.value);
+    }
+
     // saving sentence combined with two inputs to add to database
     const modifySentence = async () => {
         await putFlashcard(modifySentenceOne, modifySentenceTwo, flashcardId)
@@ -25,18 +29,31 @@ export const ModifyFlashcards = ({refreshFlashcards, flashcardId, flashcardFirst
     }
 
     useEffect(() => {
-        toggleClass();
+        const modifyForm = document.querySelector('.modifyFlashcardForm');
+
+        if(showInputs === false){
+            modifyForm.classList.remove('slideInFromBottom');
+            modifyForm.classList.add('slideInFromTop');
+            setTimeout(() => {
+                modifyForm.classList.remove('slideInFromTop');
+            }, 700);
+        }else{
+            modifyForm.classList.add('slideInFromBottom');
+        }
+
     }, [showInputs])
 
-    const toggleClass = () => {
-        if(flag){
-            modifyInputsRef.current.classList.toggle('slideInFromBottom');
-        }
-        setFlag(true);
-    }
-
     return(
-        <div ref={modifyInputsRef} class="modifyFlashcardForm">
+        
+
+        <div class="modifyFlashcardForm">
+            <div className="firstSentenceContainerModify">
+                <label for="firstSentence">
+                    <span><p>Change category</p></span>
+                </label>
+                <input type="text" autocomplete="off" name="firstSentence" className="modifyFlashcardInput" onChange={saveCategory} placeholder={flashcardFirst} required></input>
+            </div>
+
             <div className="firstSentenceContainerModify">
                 <label for="firstSentence">
                     <span><p>first sentence</p></span>
@@ -52,7 +69,6 @@ export const ModifyFlashcards = ({refreshFlashcards, flashcardId, flashcardFirst
             </div>
             <div className="flashcardModifyIcons">
                 <div className="modifyIcon" className="accept" onClick={modifySentence}></div>
-                <div className="modifyIcon" className="decline" onClick={toggleClass}></div>
             </div>
         </div>
     )

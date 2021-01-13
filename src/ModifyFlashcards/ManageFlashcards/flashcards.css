@@ -2,6 +2,17 @@ body{
     overflow-x:hidden;
 }
 
+.flashcardsMainContainer{
+    width:100vw;
+    height:92.4vh;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    background-color:#ebf3ff;
+}
+
 .flashcardsEmpty{
     width:30%;
     height:70%;;
@@ -14,7 +25,9 @@ body{
 .flashcardsEmptyContainer{
     width:100vw;
     height:92.5vh;
-    background-color:#242582;
+    background-image:url("https://images.unsplash.com/photo-1600196302476-1790ba2334f5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
+    background-size:cover;
+    background-position:center;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -22,28 +35,50 @@ body{
 }
 
 .flashcardsContainer{
-    width:100vw;
-    height:92.4vh;
+    width:70%;
+    height:90%;
     display:grid;
-    grid-template-columns:repeat(4, 1fr);
-    grid-template-rows: repeat(4,1fr);
-    background-color:#242582;
-    overflow:hidden;
+    grid-template-columns:repeat(3, 1fr);
+    grid-template-rows: repeat(3,1fr);
+    padding:2rem;
+    background-size:cover;
+    background-position:center;
+    grid-gap:2rem;
 }
 
-.flashcardPreviewContainer{
+.popup{
+    width:100%;
+    height:100%;
     position:fixed;
-    top:7.5vh;
-    width:50vw;
-    height:25vh;
-    left:25vw;
     display:flex;
     align-items:center;
     justify-content:center;
-    background-color:#2F2FA2;
-    color:white;
-    border-top:none;
-    grid-column:span 2;
+    display:none;
+    z-index:999;
+}
+
+.flashcardPreviewContainer{
+    position:absolute;
+    width:60%;
+    height:40%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background-color:white;
+    color:black;
+    z-index:10;
+}
+
+.popupBackground{
+    background-color:rgba(0, 0, 0, 0.803);
+    width:100%;
+    height:100%;
+    z-index:4;
+    position:absolute;
+}
+
+.displaynone{
+    display:flex;
 }
 
 .cardPreview{
@@ -64,22 +99,20 @@ body{
     width:70%;
     display:flex;
     align-items:center;
-    justify-content:center;
+    justify-content:space-around;
     flex-direction:column;
     text-align:center;
     position:relative;
     overflow:hidden;
 }
 
-
-.backOfTheCard{
+.firstSentencePreview{
     width:100%;
-    height:20%;
-    overflow-wrap: break-word;
+    font-size:2rem;
 }
-
-.backOfTheCard p{
-    width:100%;
+.secondSentencePreview{
+    width:80%;
+    font-size:2rem
 }
 
 .toggled{
@@ -97,6 +130,7 @@ body{
     display:grid;
     grid-template-rows: repeat(2, 1fr);
     box-shadow: -3px 0px 14px -4px rgba(0,0,0,0.71);
+    background-color:#2F2FA2;
 }
 
 .flashcardPreviewOptions div{
@@ -147,15 +181,20 @@ body{
     align-items:center;
     justify-content:center;
     flex-direction:column;
-    background-color:#242582;
+    background-color:white;
     cursor:pointer;
     height:100%;
     width:100%;
-    color:white;
+    color:black;
     font-size:2rem;
     box-sizing: border-box;
     border-bottom:1px solid;
-    box-shadow: inset 10px 10px 79px -16px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 16px -11px rgba(0,0,0,1);
+    transition:all 0.2s ease-in-out;
+}
+
+.flashcard:hover{
+    transform:scale(1.1);
 }
 
 .flashcard div{
@@ -166,18 +205,87 @@ body{
     border:solid;
 }
 
+.addFlashcard{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    height:100%;
+    background-color:#242582;
+    color:white;
+    font-size:5rem;
+    cursor:pointer;
+}
+
+.addFlashcardIconContainer{
+    width:50%;
+    height:50%;
+    background-image:url('/src/icons/add.png');
+    background-size:contain;
+    background-position:center;
+    background-repeat:no-repeat;
+    animation: infiniteRoll 1s linear infinite;
+}
+
+@keyframes infiniteRoll{
+    0%{
+        transform: rotateY(0deg);
+    }
+    10%{
+        transform: rotateY(18deg);
+    }
+    20%{
+        transform: rotateY(36deg);
+    }
+    30%{
+        transform: rotateY(54deg);
+    }
+    40%{
+        transform: rotateY(72deg);
+    }
+    50%{
+        transform: rotateY(90deg);
+    }
+    60%{
+        transform: rotateY(72deg);
+    }
+    70%{
+        transform: rotateY(54deg);
+    }
+    80%{
+        transform: rotateY(36deg);
+    }
+    90%{
+        transform: rotateY(18deg);
+    }
+    100%{
+        transform: rotateY(0deg);
+    }
+}
+
+.flashcardAddContainer{
+    position:absolute;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background-color:#2F2FA2;
+    color:white;
+    z-index:10;
+}
+
 /* input modify flashcard */
 
 .modifyFlashcardForm{
     position:absolute;
-    display:grid !important;
-    grid-template-rows: 78% 22% !important;
-    grid-template-columns:repeat(2, 1fr) !important;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
     width:100%;
     height:100%;
     transform: translateY(-100%);
-    transition:all 0.5s ease-in-out;
     background-color:#1e2057;
+    color:white;
 }
 
 .slideInFromBottom{
@@ -189,15 +297,17 @@ body{
     to{transform: translateY(0%);}
 }
 
-.accept{
-    background-image:url('/src/icons/check.png');
-    background-size:contain;
-    background-position:center;
-    background-repeat:no-repeat;
+.slideInFromTop{
+    animation:animateFromTop 0.7s ease-in-out forwards;
 }
 
-.decline{
-    background-image:url('/src/icons/cancel.png');
+@keyframes animateFromTop{
+    from{transform: translateY(0%);}
+    to{transform: translateY(-100%);}
+}
+
+.accept{
+    background-image:url('/src/icons/check.png');
     background-size:contain;
     background-position:center;
     background-repeat:no-repeat;
@@ -215,17 +325,17 @@ body{
 
 .firstSentenceContainerModify{
     width:100%;
-    height:100%;
+    height:20%;
     text-align:center;
     display:flex;
     align-items:center;
-    justify-content:flex-start;
+    justify-content:center;
     flex-direction:column;
 }
 
 .secondSentenceContainerModify{
     width:100%;
-    height:100%;
+    height:40%;
     text-align:center;
     display:flex;
     align-items:center;
@@ -234,9 +344,8 @@ body{
 }
 
 .flashcardModifyIcons{
-    grid-row:2;
-    grid-column:span 2;
     width:100%;
+    height:15%;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -247,9 +356,9 @@ body{
 }
 
 .modifyFlashcardInput{
-    width:90%;
+    width:50%;
     text-align:center;
-    height:15%;
+    height:50%;
     outline:none;
     color:white;
     font-size:1.1rem;
@@ -261,7 +370,7 @@ body{
 }
 
 .modifyFlashcardTextarea{
-    width:90%;
+    width:50%;
     height:60%;
     text-align:center;
     background-color:#1e2057;
@@ -316,15 +425,14 @@ body{
 }
 
 .form{
-    top:7.5vh;
-    position:fixed;
+    position:absolute;
+    width:25%;
+    height:65%;
     font-size:1rem;
     display:flex;
     align-items:center;
     justify-content:center;
     flex-direction:column;
-    width:25vw;
-    height:50vh;
     overflow:hidden;
     grid-row: span 2;
     background-color:#2F2FA2;
@@ -332,9 +440,8 @@ body{
     box-sizing: border-box;
     border-top:None;
     box-shadow: 2px 7px 33px -6px rgba(0,0,0,0.75);
-    border-bottom:1px solid #F64C72;
-    border-right:1px solid #F64C72;
-    border-left:1px solid #F64C72;
+    border:1px solid #F64C72;
+    z-index:12;
 }
 
 .formContainer input{
@@ -406,4 +513,10 @@ body{
     text-align:start !important;
     background: transparent;
     border:none !important;
+}
+
+.flashcardsRollContainer{
+    position:relative;
+    width:100%;
+    height:100%;
 }

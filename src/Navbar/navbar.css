@@ -9,6 +9,8 @@ nav{
     background-color:#2F2FA2;
     color:white;
     border-bottom:1px solid #F64C72;
+    box-shadow: inset 3px 2px 39px 0px rgba(0,0,0,0.75);
+    z-index:99;
 }
 ul{
     display:flex;

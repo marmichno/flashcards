@@ -1,8 +1,7 @@
-export const loginRequest = async (login, password) => {
+export const loginRequest = async (login, password, loginError) => {
+
     var myHeaders = new Headers();
     myHeaders.append("Authorization", `Basic ` + btoa(login + ":" + password));
-
-    console.log(myHeaders);
 
 
     var requestOptions = {
@@ -18,5 +17,8 @@ export const loginRequest = async (login, password) => {
     if(response.status === 200){
         let headers = btoa(login + ":" + password);
         localStorage.setItem('user', headers);
+        localStorage.setItem('username', login);
     }
+
+    return response;
 }

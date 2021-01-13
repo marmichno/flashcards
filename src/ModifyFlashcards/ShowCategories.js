@@ -2,11 +2,9 @@ import React, {useEffect, useState} from 'react';
 import {addCategoryRequest} from './categoriesRequests/addCategoryRequest';
 import {deleteCategoryRequest} from './categoriesRequests/deleteCategoryRequest';
 import {getCategoriesRequest} from './categoriesRequests/getCategoryRequest';
-import {AddCategory} from './categoriesComponents/AddCategory';
 import {Categories} from './categoriesComponents/Categories';
 import {EditCategory} from './categoriesComponents/EditCategory';
-import {DeleteCategory} from './categoriesComponents/DeleteCategory';
-import {ShowCategoryFlashcards} from './categoriesComponents/ShowCategoryFlashcards';
+import {AddCategory} from './categoriesComponents/AddCategory';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import './categories.css'
 
@@ -42,6 +40,12 @@ export const ShowCategories = () => {
     //saves clicked category index
     const saveCategoryIndex = (e) => {
         setCategoryIndex(e.target.dataset.index);
+        showModifyCategoryPopup();
+    }
+
+    const showModifyCategoryPopup = () =>{
+        let previewContainer = document.querySelector('.categoryModifyPopup');
+        previewContainer.classList.toggle('displaynone');
     }
 
 
@@ -51,18 +55,15 @@ export const ShowCategories = () => {
 
             <div className="categoriesContainer">   
                 <div className="carousel">
-                    <Categories flashCardsCategories={flashCardsCategories} saveCategoryIndex={saveCategoryIndex} refreshCategories={refreshCategories}/>
-                </div>
-                <div className="addCategory">
-                    <DeleteCategory categoryIndex={categoryIndex} refreshCategories={refreshCategories} defaultCategory={defaultCategoryIndex}/>
-                    <AddCategory refreshCategories={refreshCategories}/>
-                    <ShowCategoryFlashcards categoryIndex={categoryIndex}/>
+                    <Categories flashCardsCategories={flashCardsCategories} saveCategoryIndex={saveCategoryIndex} refreshCategories={refreshCategories} categoryIndex={categoryIndex}/>
                 </div>
             </div>
 
-            <div className="categoryPreviewContainer">
-                <EditCategory categories={flashCardsCategories} categoryIndex={categoryIndex} refreshCategories={refreshCategories} defaultCategory={defaultCategoryIndex}/>
+            <div className="addCategoryContainer">
+                <AddCategory refreshCategories={refreshCategories}/>
             </div>
+
+                <EditCategory categories={flashCardsCategories} categoryIndex={categoryIndex} refreshCategories={refreshCategories} defaultCategory={defaultCategoryIndex}/>
         </div>
         )
         }else{

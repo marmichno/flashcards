@@ -1,8 +1,11 @@
 export const putCategoryRequest = async (id, categoryName) => {
     var myHeaders = new Headers();
     myHeaders.append("Authorization", `Basic ` + localStorage.getItem('user'));
+    myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify(`${categoryName}`);
+
+    console.log(categoryName, id);
 
     var requestOptions = {
     method: 'PUT',

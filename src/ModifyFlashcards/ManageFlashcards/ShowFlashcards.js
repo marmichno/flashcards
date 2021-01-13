@@ -49,19 +49,36 @@ let categoryIndex = state.location.state.categoryIndex;
     const flashcardId = (e) => {
         if(previouslyClicked !== ''){previouslyClicked.classList.toggle('toggled')}
         setFlashcardPreviewId(e.target.dataset.index);
-        e.target.classList.toggle('toggled');
-        setPreviouslyClicked(e.target);
+        showModifyPopup();
+    }
+
+    const showModifyPopup = () => {
+        let previewContainer = document.querySelector('.flashcardPreviewPopup');
+        previewContainer.classList.toggle('displaynone');
+        
+    }
+
+    const showAddPopup = () => {
+        let previewContainer = document.querySelector('.flashcardAddPopup');
+        previewContainer.classList.toggle('displaynone');
     }
 
     if(flashCards.length > 0){
     return(
         <>
-        
-            <AddFlashcard refreshFlashcards={refreshFlashcards} categoryIndex={categoryIndex}/>
+            <div className="flashcardAddPopup popup">
+                <div className="popupBackground" onClick={showAddPopup}></div>
+                    <AddFlashcard refreshFlashcards={refreshFlashcards} categoryIndex={categoryIndex}/>
+            </div>
+
+            <div className="flashcardPreviewPopup popup">
+                <div className="popupBackground" onClick={showModifyPopup}></div>
                 <div className="flashcardPreviewContainer">
-                    <FlashcardPreview flashcards={flashCards} flashcardId={flashcardPreviewId} refreshFlashcards={refreshFlashcards} emptyContainer={false}/>
-                </div>  
-            <Flashcards flashCards={flashCards} getId={flashcardId}/>
+                        <FlashcardPreview flashcards={flashCards} flashcardId={flashcardPreviewId} refreshFlashcards={refreshFlashcards} showModifyPopup={showModifyPopup} emptyContainer={false}/>
+                </div>
+            </div>
+            
+            <Flashcards flashCards={flashCards} getId={flashcardId} showAddPopup={showAddPopup}/>
         </>
     )
     }else if(flashCards.status === 404){

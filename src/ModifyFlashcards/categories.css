@@ -6,21 +6,29 @@
     justify-content:center;
     flex-direction:column;
     overflow:hidden;
-    background-color:#242582;
+    background-color:#ebf3ff;
+    position:relative;
 }
 
 .categoriesContainer{
     width:100%;
-    height:60%;
+    height:30%;
+}
+
+.categoryModifyPopup{
+    width:100%;
+    height:100%;
+    position:absolute !important;
+    flex-direction:column;
+    justify-content:space-around !important;
 }
 
 .carousel{
-    height:50%;
+    height:100%;
     width:100%;
     display:flex;
     align-items:center;
     justify-content:space-around;
-    box-shadow: 6px 0px 20px -2px rgba(0,0,0,0.75);
 }
 
 .categoriesCarousel{
@@ -41,21 +49,33 @@
     align-items:center;
     justify-content:center;
     color:white;
-    border: 1px solid #F64C72;
-    font-size:1.1rem;
+    border: none;
+    font-size:2rem;
     text-align:center;
     cursor:pointer;
-    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.356);
     transition:all 0.2s;
+    background-color:white;
+    color:black;
 }
 
 .category:hover{
     transform:scale(1.1);
 }
 
+.goDown{
+    animation:slideDown 0.4s ease-in-out forwards !important;
+}
+
+@keyframes slideDown{
+    from{transform: translateY(0%);}
+    to{trasnform: translateY(200%);}
+}
+
+
 
     .slideFromRight{
-        animation:slideFromRight 1.3s ease-in-out forwards;
+        animation:slideFromRight 1s ease-in-out forwards;
     }
 
     @keyframes slideFromRight{
@@ -64,20 +84,21 @@
     }
 
 .categoryPreviewContainer{
-    height:40%;
+    height:100%;
     width:100%;
     display:flex;
-    align-items:center;
-    justify-content:center;
+    align-items:flex-start;
+    justify-content:flex-start;
     box-shadow: 6px 0px 20px -2px rgba(0,0,0,0.75);
 }
 
 .editCategoryContainer{
     display:flex;
-    height:65%;
+    height:25%;
     width:40%;
-    position:relative;
     box-shadow: 3px 9px 60px -8px rgba(0,0,0,0.75);
+    position:relative;
+    z-index:5;
 }
 
 .categoryPreview{
@@ -86,8 +107,42 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    background-color:#090b33;
-    color:white;
+    background-color:white;
+    color:black;
+}
+
+.fullcontainer{
+    width:100%;
+    height:100%;
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    grid-template-rows:repeat(2, 1fr);
+}
+
+@keyframes swagRoll{
+    from{transform: rotateY(0);}
+    to{transform: rotateY(180deg);}
+}
+
+.swagRoll{
+    transform-style: preserve-3d;
+    transform:perspective(1000px) rotateY(180deg);
+    transition:all 300ms;
+    animation:swagRoll 0.3s ease-in-out forwards;
+}
+
+.front, .back{
+    position:absolute;
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    backface-visibility: hidden;
+}
+
+.back{
+    transform: rotateY(180deg);
 }
 
 .categoryButtons{
@@ -112,7 +167,7 @@
 
 .categoryModifyInput{
     position:absolute;
-    background-color:#1e2057;
+    background-color:#2F2FA2;
     width:100% !important;
     height:20% !important;
     left:0;
@@ -120,6 +175,7 @@
     display:flex;
     align-items:center;
     justify-content:center;
+    transform: rotateY(180deg);
 }
 
 .categoryModifyInputContainer{
@@ -155,18 +211,20 @@
 /* delete category */
 
 .categoryDeleteContainer{
-    height:100%;
-    width:100%;
+    height:25%;
+    width:40%;
     display:flex;
     align-items:center;
     justify-content:center;
     flex-direction:row;
-    transition:all 0.5s;
+    background-color:#2F2FA2;
+    z-index:5;
 }
 
 .categoryDelete{
     height:100%;
     width:100%;
+    transition:all 0.5s;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -181,7 +239,7 @@
     height:30%;
 }
 
-.categoryDeleteContainer:hover{
+.categoryDelete:hover{
     transform:scale(1.1);
     cursor:pointer;
 }
@@ -202,8 +260,11 @@
     cursor:pointer;
 }
 
-a{
+.categoryModifyPopup a{
     text-decoration: none !important;
+    width:40%;
+    height:25%;
+    z-index:5;
 }
 
 /* showCategoryIcon */
@@ -211,10 +272,15 @@ a{
 .categoryShowFlashcards{
     width:100%;
     height:100%;
-    margin-right:5rem;
     display:flex;
     align-items:center;
     justify-content:center;
+    background-color:#2F2FA2;
+}
+
+.categoryFlashcards{
+    grid-row:2;
+    grid-column:3;
 }
 
 .categoryFlashcardsIcon{
@@ -235,6 +301,9 @@ a{
     height:50%;
     display:grid;
     grid-template-columns:repeat(3, 1fr);
+    background-color:rgba(48, 29, 193, 0.78);
+    border-bottom:1px solid #F64C72;
+    border-top:1px solid #F64C72;
 }
 
 .categoryForm{
@@ -245,7 +314,15 @@ a{
     justify-content:center;
     flex-direction:column;
     overflow:hidden;
-    box-shadow: inset 10px 10px 79px -16px rgba(0,0,0,0.75);
+    background-color:#2F2FA2;
+    position:relative;
+    grid-column:2;
+}
+
+.categoryForm .error{
+    position:absolute;
+    bottom:10%;
+    font-size:1.2rem;
 }
 
 .addIconCategory{
@@ -271,10 +348,6 @@ a{
 
 /* edit category */
 
-.editCategoryContainer{
-    border:1px solid #F64C72;
-}
-
 /* arrows */
 .categoryCarouselArrow{
     width:10%;
@@ -296,4 +369,10 @@ a{
 
 .arrowRight{
     background-image:url('/src/icons/arrowRight.png');
+}
+
+.addCategoryContainer{
+    width:30%;
+    height:30%;
+    box-shadow: 10px 10px 18px -5px rgba(0,0,0,0.75);
 }
