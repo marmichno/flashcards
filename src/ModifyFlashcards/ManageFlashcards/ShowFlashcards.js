@@ -15,8 +15,7 @@ const [flashCards, setFlashCards] = useState("");
 const [clickedSentenceId, setClickedSentenceId] = useState();
 const [flashcardPreviewId, setFlashcardPreviewId] = useState(undefined);
 const [previouslyClicked, setPreviouslyClicked] = useState('');
-
-let categoryIndex = state.location.state.categoryIndex;
+const [categoryIndex, setCategoryIndex] = useState(state.location.state.categoryIndex); //categoryIndex from showCategories saved in location state {router}
 
 
     // gets all flashcards / refreshes page after change
@@ -52,12 +51,14 @@ let categoryIndex = state.location.state.categoryIndex;
         showModifyPopup();
     }
 
+    //modify flashcard popup animation
     const showModifyPopup = () => {
         let previewContainer = document.querySelector('.flashcardPreviewPopup');
         previewContainer.classList.toggle('displaynone');
         
     }
 
+    //add flashcard popup animation
     const showAddPopup = () => {
         let previewContainer = document.querySelector('.flashcardAddPopup');
         previewContainer.classList.toggle('displaynone');
@@ -74,7 +75,7 @@ let categoryIndex = state.location.state.categoryIndex;
             <div className="flashcardPreviewPopup popup">
                 <div className="popupBackground" onClick={showModifyPopup}></div>
                 <div className="flashcardPreviewContainer">
-                        <FlashcardPreview flashcards={flashCards} flashcardId={flashcardPreviewId} refreshFlashcards={refreshFlashcards} showModifyPopup={showModifyPopup} emptyContainer={false}/>
+                        <FlashcardPreview categoryIndex={categoryIndex} flashcards={flashCards} flashcardId={flashcardPreviewId} refreshFlashcards={refreshFlashcards} showModifyPopup={showModifyPopup} emptyContainer={false}/>
                 </div>
             </div>
             

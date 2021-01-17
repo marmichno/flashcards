@@ -57,8 +57,8 @@ export const HomePage = () => {
                         </p>
                     </div>
 
-                    <div className="flashcardHome"></div>
-                    <div className="flashcardHome"></div>
+                    <div className="flashcardHome firstFlashcardHome"></div>
+                    <div className="flashcardHome secondFlashcardHome"></div>
                     <div className="loginForm">
 
                         <div className="loginFormContainer">
@@ -102,12 +102,14 @@ export const HomePage = () => {
                         </p>
                     </div>
 
-                    <div className="flashcardHome"></div>
-                    <div className="flashcardHome"></div>
+                    <div className="flashcardHome firstFlashcardHome"></div>
+                    <div className="flashcardHome secondFlashcardHome"></div>
 
                     <div className="loggedContainer">
                         <h1>Welcome</h1><span><h1>{`${localStorage.getItem('username')}`}</h1></span>
-                        <div><p onClick={logoutReset}>Logout</p></div>
+                        <div className="logoutContainer">
+                            <div onClick={logoutReset} className="logoutIcon"></div>
+                        </div>
                     </div>
                 </div>
             </div>

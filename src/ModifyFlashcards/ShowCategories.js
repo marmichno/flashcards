@@ -43,6 +43,7 @@ export const ShowCategories = () => {
         showModifyCategoryPopup();
     }
 
+    //adding popup css
     const showModifyCategoryPopup = () =>{
         let previewContainer = document.querySelector('.categoryModifyPopup');
         previewContainer.classList.toggle('displaynone');

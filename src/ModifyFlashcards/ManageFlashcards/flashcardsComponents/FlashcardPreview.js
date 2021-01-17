@@ -2,7 +2,7 @@ import {deleteSentence} from '../flashcardsRequests/deleteSentence';
 import {ModifyFlashcards} from './ModifyFlashcards';
 import {useState, useEffect} from 'react';
 
-export const FlashcardPreview = ({flashcardId, flashcards, refreshFlashcards, showModifyPopup}) => {
+export const FlashcardPreview = ({categoryIndex, flashcardId, flashcards, refreshFlashcards, showModifyPopup}) => {
 
     const [showModifyInputs, setShowModifyInputs] = useState(false);
 
@@ -25,12 +25,14 @@ export const FlashcardPreview = ({flashcardId, flashcards, refreshFlashcards, sh
             }
         })[0];
 
+        //delete request / modify animation
         const deleteFlashcard = async () => {
             await deleteSentence(flashcardId);
             refreshFlashcards();
             showModifyPopup();
         }
 
+        
         if(flashcardId === undefined || flashcards === undefined || flashcardToPreview === undefined){
             return null;
         }
@@ -40,7 +42,7 @@ export const FlashcardPreview = ({flashcardId, flashcards, refreshFlashcards, sh
             <div className="card">
                 <div className="firstSentencePreview"><h2>{flashcardToPreview.firstSentence}</h2></div>
                 <div className="secondSentencePreview"><p>{flashcardToPreview.secondSentence}</p></div>
-                <ModifyFlashcards showInputs={showModifyInputs} refreshFlashcards={refreshFlashcards} flashcardId={flashcardId} flashcardFirst={flashcardToPreview.firstSentence} flashcardSecond={flashcardToPreview.secondSentence}/>
+                <ModifyFlashcards categoryIndex={categoryIndex} showInputs={showModifyInputs} refreshFlashcards={refreshFlashcards} flashcardId={flashcardId} flashcardFirst={flashcardToPreview.firstSentence} flashcardSecond={flashcardToPreview.secondSentence}/>
             </div>
 
             <div className="flashcardPreviewOptions">

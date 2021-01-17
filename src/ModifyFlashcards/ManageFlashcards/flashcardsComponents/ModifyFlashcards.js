@@ -1,12 +1,10 @@
 import {putFlashcard} from '../flashcardsRequests/putFlashcard';
 import {useState, useEffect} from 'react';
 
-export const ModifyFlashcards = ({refreshFlashcards, flashcardId, flashcardFirst, flashcardSecond, showInputs}) => {
+export const ModifyFlashcards = ({categoryIndex, refreshFlashcards, flashcardId, flashcardFirst, flashcardSecond, showInputs}) => {
 
     const [modifySentenceOne, setModifySentenceOne] = useState("");
     const [modifySentenceTwo, setModifySentenceTwo] = useState("");
-    const [modifyCategory, setModifyCategory] = useState("");
-
 
     // saving input text to add new flashcard
     const sentenceOne = (e) => {
@@ -18,16 +16,14 @@ export const ModifyFlashcards = ({refreshFlashcards, flashcardId, flashcardFirst
         setModifySentenceTwo(e.target.value);
     }
 
-    const saveCategory = (e) =>{
-        setModifyCategory(e.target.value);
-    }
 
     // saving sentence combined with two inputs to add to database
     const modifySentence = async () => {
-        await putFlashcard(modifySentenceOne, modifySentenceTwo, flashcardId)
+        await putFlashcard(modifySentenceOne, modifySentenceTwo, flashcardId, categoryIndex)
         refreshFlashcards();
     }
 
+    //modify flashcardform animation
     useEffect(() => {
         const modifyForm = document.querySelector('.modifyFlashcardForm');
 
@@ -47,12 +43,6 @@ export const ModifyFlashcards = ({refreshFlashcards, flashcardId, flashcardFirst
         
 
         <div class="modifyFlashcardForm">
-            <div className="firstSentenceContainerModify">
-                <label for="firstSentence">
-                    <span><p>Change category</p></span>
-                </label>
-                <input type="text" autocomplete="off" name="firstSentence" className="modifyFlashcardInput" onChange={saveCategory} placeholder={flashcardFirst} required></input>
-            </div>
 
             <div className="firstSentenceContainerModify">
                 <label for="firstSentence">

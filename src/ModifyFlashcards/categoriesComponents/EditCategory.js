@@ -10,6 +10,7 @@ export const EditCategory = ({categories, categoryIndex, refreshCategories, defa
 
     const [categoryName, setCategoryName] = useState("");
 
+    //saves category index / resets to default after deleting category
     let categoryToPreview = categories.filter(value => {
         if(value.id == categoryIndex){
             return true;
@@ -30,6 +31,7 @@ export const EditCategory = ({categories, categoryIndex, refreshCategories, defa
         setCategoryName(e.target.value);
     }
 
+    //modify popup animation
     const showModifyCategoryPopup = () =>{
         let previewContainer = document.querySelector('.categoryModifyPopup');
         previewContainer.classList.toggle('displaynone');

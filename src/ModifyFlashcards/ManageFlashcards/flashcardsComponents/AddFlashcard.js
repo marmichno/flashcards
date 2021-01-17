@@ -21,6 +21,8 @@ export const AddFlashcard = ({refreshFlashcards, categoryIndex, emptyContainer})
         await addFlashcard(addSentenceOne, addSentenceTwo, categoryIndex);
         refreshFlashcards();
     }
+
+    
     if(emptyContainer){
         return(
             <div class="form">

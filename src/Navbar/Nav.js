@@ -33,12 +33,9 @@ export const Nav = () =>{
             </Link>
 
             <Link to="/editCategories">
-              <li>Edit Flashcards</li>
+              <li>Flashcards</li>
             </Link>
 
-            <Link to="/register">
-              <li>Register</li>
-            </Link>
               <li>Learn</li>
 
             <Link to="/">

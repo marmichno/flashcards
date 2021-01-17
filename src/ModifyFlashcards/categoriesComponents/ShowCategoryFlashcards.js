@@ -5,6 +5,8 @@ export const ShowCategoryFlashcards = ({categoryIndex}) => {
     
     const [category, setCategory] = useState();
 
+
+    //saving clicked category index to state
     useEffect(() => {
         setCategory(parseInt(categoryIndex));
     }, [categoryIndex])

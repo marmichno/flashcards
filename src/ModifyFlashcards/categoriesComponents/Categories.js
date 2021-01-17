@@ -7,13 +7,11 @@ export const Categories = ({flashCardsCategories, saveCategoryIndex}) => {
     const [carousel, setCarousel] = useState(0);
 
 
-    let backgroundColors = ['#252668', '#1c1e69', '#191c66', '#3339ce', '#2025b1', '#3a3eb3'];
-
     let flashcardsCategoriesArray = [[]];
     let x = 0;
 
     
-
+    //creating new array to manage how many categories has to be displayed
     flashCardsCategories.map((value, index) => {
         if(index % 5 === 0 && index != 0){
             x++;
@@ -24,7 +22,7 @@ export const Categories = ({flashCardsCategories, saveCategoryIndex}) => {
         }
     })
 
-
+    // covers carousel animations and manages which array of categories has to be displayed
     const carouselNext = (e) =>{
 
         let direction = e.target.dataset.direction;

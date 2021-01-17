@@ -10,6 +10,8 @@ export const AddCategory = ({refreshCategories}) => {
     const saveNewCategory = async () => {
         let response = await addCategoryRequest(addCategory);
 
+
+        // handle response errors
         if(response.status === 409){
             setError("This category already exist");
         }else if(response.status === 400){
