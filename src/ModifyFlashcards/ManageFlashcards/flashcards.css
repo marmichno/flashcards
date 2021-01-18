@@ -10,6 +10,7 @@ body{
     align-items:center;
     justify-content:center;
     flex-direction:column;
+    min-height:550px;
 }
 
 .flashcardsEmpty{
@@ -47,6 +48,7 @@ body{
     width:100%;
     height:100%;
     position:fixed;
+    top:0;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -55,7 +57,6 @@ body{
 }
 
 .flashcardPreviewContainer{
-    position:absolute;
     width:60%;
     height:40%;
     display:flex;
@@ -64,6 +65,7 @@ body{
     background-color:white;
     color:black;
     z-index:10;
+    min-height:250px;
 }
 
 .popupBackground{
@@ -105,11 +107,11 @@ body{
 
 .firstSentencePreview{
     width:100%;
-    font-size:2rem;
+    font-size:1.5rem;
 }
 .secondSentencePreview{
     width:80%;
-    font-size:2rem
+    font-size:1.5rem;
 }
 
 .toggled{
@@ -130,11 +132,16 @@ body{
     background-color:#2F2FA2;
 }
 
+.flashcardPreviewOptions div:hover{
+    transform:scale(1.1);
+}
+
 .flashcardPreviewOptions div{
     display:flex;
     align-items:center;
     justify-content:center;
     flex-direction:column;
+    transition:all 0.2s;
 }
 
 .previewDeleteIcon{
@@ -188,6 +195,24 @@ body{
     border-bottom:1px solid;
     box-shadow: 10px 10px 16px -11px rgba(0,0,0,1);
     transition:all 0.2s ease-in-out;
+}
+
+.flashcard div{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow-wrap: break-word;
+    text-align:center;
+    word-wrap: break-word;
+    word-break: break-all;
+    word-break: break-word;
+    hyphens: auto;
+    width:100%;
+    height:100%;
+}
+
+.flashcardText{
+    width:90%;
 }
 
 .flashcard:hover{
@@ -314,6 +339,7 @@ body{
     width:10%;
     height:90%;
     cursor:pointer;
+    margin-top:1rem;
 }
 
 .modifyFlashcardForm label{
@@ -390,7 +416,13 @@ body{
     width:10%;
     height:10%;
     cursor:pointer;
+    transition:all 0.2s;
 }
+
+.addIcon:hover{
+    transform:scale(1.1);
+}
+
 .addIconText{
     font-size:1.5rem;
     color:white;
@@ -521,4 +553,77 @@ body{
     position:relative;
     width:100%;
     height:100%;
+}
+
+@media (max-height:840px){
+    .flashcardPreviewContainer{
+        width:50%;
+    }
+
+    .form{
+        width:30%;
+        height:80%;
+        min-height:0px;
+    }
+}
+
+@media (max-width:1300px){
+    .form{
+        width:50%;
+    }
+}
+
+@media (max-width:1200px){
+    .flashcardPreviewContainer{
+        width:70%;
+    }
+}
+
+@media (max-width:900px){
+    .flashcardPreviewContainer{
+        width:100%;
+    }
+}
+
+@media (max-width:800px){
+    .flashcardsContainer{
+        width:90%;
+        height:80%;
+        grid-gap:1rem;
+    }
+
+    .form{
+        width:90%;
+        height:60%;
+    }
+
+    .flashcardPreviewContainer{
+        height:40%;
+    }
+
+    .accept{
+        width:20%;
+    }
+
+    .modifyFlashcardTextarea{
+        width:90%;
+    }
+
+    .modifyFlashcardInput{
+        width:90%;
+    }
+
+    .flashcardsMainContainer{
+        height:50.4vh !important;
+        min-height:400px;
+    }
+
+    .flashcard div{
+        font-size:1.2rem !important;
+    }
+
+    .secondSentencePreview{
+        overflow-y:scroll;
+        height:50%;
+    }
 }

@@ -57,8 +57,24 @@ export const HomePage = () => {
                         </p>
                     </div>
 
-                    <div className="flashcardHome firstFlashcardHome"></div>
-                    <div className="flashcardHome secondFlashcardHome"></div>
+                    <div className="flashcardHome firstFlashcardHome flip">
+                        <div className="front">
+                            <h1>Dog</h1>
+                        </div>
+                        <div className="back">
+                            <h1>best dyl ever</h1>
+                        </div>
+                    </div>
+
+                    <div className="flashcardHome secondFlashcardHome flip">
+                        <div className="front">
+                            <h1>Dog</h1>
+                        </div>
+                        <div className="back">
+                            <h1>best dyl ever</h1>
+                        </div>
+                    </div>
+
                     <div className="loginForm">
 
                         <div className="loginFormContainer">

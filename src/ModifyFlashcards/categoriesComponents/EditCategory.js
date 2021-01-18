@@ -40,7 +40,7 @@ export const EditCategory = ({categories, categoryIndex, refreshCategories, defa
     return(
             <div className="categoryModifyPopup popup">
                 <div className="popupBackground" onClick={showModifyCategoryPopup}></div>
-                <div key={categoryIndex} className="editCategoryContainer swagRoll">
+                <div key={categoryIndex} className="editCategoryContainer flip">
                     <div className="categoryPreview">
                         <div className="front">
                         </div>
