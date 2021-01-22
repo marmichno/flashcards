@@ -1,30 +1,43 @@
 import {useState} from 'react';
-import {addFlashcard} from '../flashcardsRequests/addFlashcard';
+import {addFlashcard} from '../../../requests/flashcardsRequests/addFlashcard';
 
 export const AddFlashcard = ({refreshFlashcards, categoryIndex, emptyContainer}) =>{
 
     const [addSentenceOne, setAddSentenceOne] = useState("");
     const [addSentenceTwo, setAddSentenceTwo] = useState("");
 
-    // container label gets refreshed after changes
-    let firstSentence = document.querySelector('.firstSentenceContainer label span p');
-    let secondSentence = document.querySelector('.secondSentenceContainer label span p');
-    firstSentence.innerText = "first sentence";
-    secondSentence.innerText = "second sentence";
-
     // saving input text to add new flashcard
     const sentenceOne = (e) => {
+        
+    let firstSentence = document.querySelector('.firstSentenceContainer label span p');
+    let secondSentence = document.querySelector('.secondSentenceContainer label span p');
+
+        if(firstSentence.innerText != "first sentence"){
+            firstSentence.innerText = "first sentence";
+        };
+
         setAddSentenceOne(e.target.value);
     }
 
     // saving second input text to add new flashcard
-    const sentenceTwo = (e) => {
+    const sentenceTwo = (e) => {          
+        
+    let firstSentence = document.querySelector('.firstSentenceContainer label span p');
+    let secondSentence = document.querySelector('.secondSentenceContainer label span p');
+
+        if(secondSentence.innerText != "second sentence"){
+            secondSentence.innerText = "second sentence";
+        };
+
         setAddSentenceTwo(e.target.value);
     }
 
     // saving sentence combined with two inputs to add to database
     const saveNewSentence = async () => {
-        
+
+        let firstSentence = document.querySelector('.firstSentenceContainer label span p');
+        let secondSentence = document.querySelector('.secondSentenceContainer label span p');
+
         if(addSentenceOne.length < 1){
             firstSentence.innerText = "cannot be null";
         }else if(addSentenceTwo.length < 1){
@@ -42,37 +55,39 @@ export const AddFlashcard = ({refreshFlashcards, categoryIndex, emptyContainer})
 
     
     if(emptyContainer){
+
         return(
-            <div class="form">
+            <div className="form">
                 <div className="firstSentenceContainer formContainer">
-                    <input type="text" autocomplete="off" name="firstSentence" onChange={sentenceOne} className="firstSentenceInput" required></input>
-                    <label for="firstSentence" className="label-name">
+                    <input type="text" autoComplete="off" name="firstSentence" onChange={sentenceOne} className="firstSentenceInput" required></input>
+                    <label htmlFor="firstSentence" className="label-name">
                         <span className="contentName"><p>first sentence</p></span>
                     </label>
                 </div>
     
                 <div className="secondSentenceContainer formContainer">
-                    <textarea autocomplete="off" name="secondSentence" onChange={sentenceTwo} className="secondSentenceInput" required></textarea>
-                    <label for="secondSentence" className="label-name textarea">
+                    <textarea autoComplete="off" name="secondSentence" onChange={sentenceTwo} className="secondSentenceInput" required></textarea>
+                    <label htmlFor="secondSentence" className="label-name textarea">
                         <span className="contentName"><p>second sentence</p></span>
                     </label>
                 </div>
-                <div className="addIcon" onClick={saveNewSentence}></div>
+                <div className="addIcon" onClick={saveNewSentence}></div><p className="addIconText">Add new sentence</p>
             </div>
         )
     }else{
+
         return(
-            <div class="form">
+            <div className="form">
                 <div className="firstSentenceContainer formContainer">
-                    <input type="text" autocomplete="off" name="firstSentence" onChange={sentenceOne} className="firstSentenceInput" required></input>
-                    <label for="firstSentence" className="label-name">
+                    <input type="text" autoComplete="off" name="firstSentence" onChange={sentenceOne} className="firstSentenceInput" required></input>
+                    <label htmlFor="firstSentence" className="label-name">
                         <span className="contentName"><p>first sentence</p></span>
                     </label>
                 </div>
     
                 <div className="secondSentenceContainer formContainer">
-                    <textarea autocomplete="off" name="secondSentence" onChange={sentenceTwo} className="secondSentenceInput" required></textarea>
-                    <label for="secondSentence" className="label-name textarea">
+                    <textarea autoComplete="off" name="secondSentence" onChange={sentenceTwo} className="secondSentenceInput" required></textarea>
+                    <label htmlFor="secondSentence" className="label-name textarea">
                         <span className="contentName"><p>second sentence</p></span>
                     </label>
                 </div>

@@ -10,7 +10,5 @@ export const getCategoriesRequest = async () => {
     
     let request = await fetch("http://localhost:8080/api/categories", requestOptions);
     let response = await request.json();
-
-    console.log(response);
     return response;
 }

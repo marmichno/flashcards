@@ -1,9 +1,8 @@
 import '../categories.css'
-import {putCategoryRequest} from '../categoriesRequests/putCategoryRequest';
-import {useState, useEffect} from 'react';
+import {putCategoryRequest} from '../../requests/categoriesRequests/putCategoryRequest';
+import {useState} from 'react';
 import {DeleteCategory} from '../categoriesComponents/DeleteCategory';
 import {ShowCategoryFlashcards} from '../categoriesComponents/ShowCategoryFlashcards';
-import {AddCategory} from '../categoriesComponents/AddCategory';
 
 
 export const EditCategory = ({categories, categoryIndex, refreshCategories, defaultCategory}) => {
@@ -12,7 +11,7 @@ export const EditCategory = ({categories, categoryIndex, refreshCategories, defa
 
     //saves category index / resets to default after deleting category
     let categoryToPreview = categories.filter(value => {
-        if(value.id == categoryIndex){
+        if(value.id === parseInt(categoryIndex)){
             return true;
         }else{
             return false;

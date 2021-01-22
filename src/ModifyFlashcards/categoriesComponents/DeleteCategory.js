@@ -1,4 +1,4 @@
-import {deleteCategoryRequest} from '../categoriesRequests/deleteCategoryRequest';
+import {deleteCategoryRequest} from '../../requests/categoriesRequests/deleteCategoryRequest';
 
 export const DeleteCategory = ({categoryIndex, refreshCategories, defaultCategory}) => {
 

@@ -1,11 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {addCategoryRequest} from './categoriesRequests/addCategoryRequest';
-import {deleteCategoryRequest} from './categoriesRequests/deleteCategoryRequest';
-import {getCategoriesRequest} from './categoriesRequests/getCategoryRequest';
+import {getCategoriesRequest} from '../requests/categoriesRequests/getCategoryRequest';
 import {Categories} from './categoriesComponents/Categories';
 import {EditCategory} from './categoriesComponents/EditCategory';
 import {AddCategory} from './categoriesComponents/AddCategory';
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import './categories.css'
 
 export const ShowCategories = () => {
@@ -29,13 +26,6 @@ export const ShowCategories = () => {
     useEffect(() =>{
         refreshCategories();
     }, [])
-
-
-    //deleting category by id
-    const deleteCategory = async (e) =>{
-        await deleteCategoryRequest(e.target.dataset.index)
-        refreshCategories();
-    }
 
     //saves clicked category index
     const saveCategoryIndex = (e) => {

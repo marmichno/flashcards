@@ -1,5 +1,5 @@
 import '../HomePage/homepage.css'
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {loginRequest} from '../Login/loginRequest';
 import {useSelector, useDispatch} from 'react-redux';
 import {login} from '../actions';

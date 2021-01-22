@@ -1,21 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import {addFlashcard} from './flashcardsRequests/addFlashcard';
-import {deleteSentence} from './flashcardsRequests/deleteSentence';
-import {getFlashcards} from './flashcardsRequests/getFlashcards';
+import {getFlashcards} from '../..//requests/flashcardsRequests/getFlashcards';
 import {Flashcards} from './flashcardsComponents/Flashcards';
 import {AddFlashcard} from './flashcardsComponents/AddFlashcard';
 import {FlashcardPreview} from './flashcardsComponents/FlashcardPreview';
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import './flashcards.css';
 
 
 export const ShowFlashcards = (state) =>{
 
 const [flashCards, setFlashCards] = useState("");
-const [clickedSentenceId, setClickedSentenceId] = useState();
 const [flashcardPreviewId, setFlashcardPreviewId] = useState(undefined);
 const [previouslyClicked, setPreviouslyClicked] = useState('');
-const [categoryIndex, setCategoryIndex] = useState(state.location.state.categoryIndex); //categoryIndex from showCategories saved in location state {router}
+let categoryIndex = state.location.state.categoryIndex; //categoryIndex from showCategories saved in location state {router}
 
 
     // gets all flashcards / refreshes page after change
@@ -93,7 +89,4 @@ const [categoryIndex, setCategoryIndex] = useState(state.location.state.category
     }else{
         return null;
     } 
-
-    return null;
-
 }

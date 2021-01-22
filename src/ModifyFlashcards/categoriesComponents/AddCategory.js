@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {addCategoryRequest} from '../categoriesRequests/addCategoryRequest';
+import {addCategoryRequest} from '../../requests/categoriesRequests/addCategoryRequest';
 
 export const AddCategory = ({refreshCategories}) => {
 

@@ -1,5 +1,4 @@
-import {Link} from 'react-router-dom';
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import '../categories.css';
 
 export const Categories = ({flashCardsCategories, saveCategoryIndex}) => {
@@ -13,13 +12,15 @@ export const Categories = ({flashCardsCategories, saveCategoryIndex}) => {
     
     //creating new array to manage how many categories has to be displayed
     flashCardsCategories.map((value, index) => {
-        if(index % 5 === 0 && index != 0){
+        if(index % 5 === 0 && index !== 0){
             x++;
             flashcardsCategoriesArray.push([]);
             flashcardsCategoriesArray[x].push(value);
         }else{
             flashcardsCategoriesArray[x].push(value);
         }
+
+        return value;
     })
 
     // covers carousel animations and manages which array of categories has to be displayed

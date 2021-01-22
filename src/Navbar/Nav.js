@@ -6,11 +6,10 @@ import {logout} from '../actions';
 
 export const Nav = () =>{
 
-  const loginState = useSelector(state => state.isLogged);
+  useSelector(state => state.isLogged);
   const dispatch = useDispatch();
-  let isUserLoggedIn = localStorage.getItem('user');
 
-  if(localStorage.getItem('username') === null){
+  if(localStorage.getItem('user') === null){
     return(
         <nav>
             <ul>
@@ -36,7 +35,9 @@ export const Nav = () =>{
               <li>Flashcards</li>
             </Link>
 
+            <Link to="/learn-choose-category">
               <li>Learn</li>
+              </Link>
 
             <Link to="/">
               <li onClick={() => dispatch(logout())}>Logout</li>

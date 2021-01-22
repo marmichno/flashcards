@@ -1,0 +1,55 @@
+.learnChooseCategoryMainContainer{
+    width:100vw;
+    height:92.35vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    background-color:#ebf3ff;
+    position:relative;
+    min-height: 600px !important;
+}
+
+.learnChooseCategory{
+    width:50%;
+    height:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    text-align:center;
+    font-size:1.5rem;
+}
+
+.learnChooseCategory p span{
+    color:#F64C72;
+}
+
+
+.learnChooseCategory p{
+    letter-spacing:0.1rem;
+}
+
+.learnChooseCategory select{
+    width:20%;
+    margin:1rem;
+}
+
+.learnChooseMode{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    width:60%;
+    height:25%;
+    grid-gap:1rem;
+    border:solid;
+}
+
+.learnChooseMode div{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    height:100%;
+    background-color:red;
+    font-size:1.5rem;
+}

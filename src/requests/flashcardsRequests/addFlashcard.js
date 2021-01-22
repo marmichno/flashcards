@@ -12,6 +12,5 @@ export const addFlashcard = async (firstSentence, secondSentence, categoryId) =>
     redirect: 'follow'
     };
 
-    const request = await fetch("http://localhost:8080/api/flashcard", requestOptions);
-    const response = await request;
+    await fetch("http://localhost:8080/api/flashcard", requestOptions);
 }

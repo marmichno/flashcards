@@ -1,6 +1,6 @@
-import {deleteSentence} from '../flashcardsRequests/deleteSentence';
+import {deleteSentence} from '../../../requests/flashcardsRequests/deleteSentence';
 import {ModifyFlashcards} from './ModifyFlashcards';
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 
 export const FlashcardPreview = ({categoryIndex, flashcardId, flashcards, refreshFlashcards, showModifyPopup}) => {
 
@@ -18,7 +18,7 @@ export const FlashcardPreview = ({categoryIndex, flashcardId, flashcards, refres
 
         //finds clicked flashcard
         let flashcardToPreview = flashcards.filter(value => {
-            if(value.id == flashcardId){
+            if(value.id === parseInt(flashcardId)){
                 return true;
             }else{
                 return false;
