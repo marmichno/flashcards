@@ -12,7 +12,7 @@
 
 .learnChooseCategory{
     width:50%;
-    height:50%;
+    height:20%;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -41,7 +41,7 @@
     width:60%;
     height:25%;
     grid-gap:1rem;
-    border:solid;
+    padding:1rem;
 }
 
 .learnChooseMode div{
@@ -52,4 +52,28 @@
     height:100%;
     background-color:red;
     font-size:1.5rem;
+    opacity:0.3;
+    cursor:pointer;
+}
+
+.learnActive{
+    opacity:1 !important;
+}
+
+.lastLearning{
+    width:20%;
+    height:10%;
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    grid-gap:2rem;
+    padding:2rem;
+}
+
+.lastLearning div{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background-color:red;
+    opacity:0.3;
+    cursor:pointer;
 }

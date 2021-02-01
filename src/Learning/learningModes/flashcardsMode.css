@@ -1,0 +1,40 @@
+.flashcardLearningModeMainContainer{
+    width:100vw;
+    height:92.35vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    background-color:#ebf3ff;
+    position:relative;
+    min-height: 600px !important;
+}
+
+.flashcardLearningModeMainContainer .editCategoryContainer{
+    height:40%;
+    width:50%;
+    box-shadow: 0px 0px 18px -5px rgba(0,0,0,0.48);
+    cursor:pointer;
+}
+
+.learningFlashcardButtonsContainer{
+    width:50%;
+    height:10%;
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+    font-size:1.5rem;
+}
+
+.learningFlashcardButtonsContainer div{
+    cursor:pointer;
+}
+
+.learningFlashcardButtonsContainer .buttonNotActive{
+    opacity:0.3;
+    cursor:default;
+}
+
+.learningFlashcardButtonsContainer div:nth-child(4){
+    font-size:2.5rem;
+}

@@ -1,11 +1,51 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
+import {getNextFlashcard} from '../../requests/learningRequests/getNextFlashcard';
+import {getCurrentFlashcard} from '../../requests/learningRequests/getCurrentFlashcard';
 
-export const FlashcardLearning = (state) =>{
+export const Flashcard = () => {
 
-    let categoryIndex = state.location.state.categoryIndex; //categoryIndex from showCategories saved in location state {router}
+    const [currentFlashcard, setCurrentFlashcard] = useState(getCurrentFlashcard());
+
+    const nextFlashcard = () =>{
+        getNextFlashcard().then(result =>{
+            setCurrentFlashcard(result);
+        })
+    }
+
+    useEffect(() => {
+        getCurrentFlashcard().then(result =>{
+            setCurrentFlashcard(result);
+        })
+    }, []);
+
+    const flip = () =>{
+        let flashcard = document.querySelector('.flashcardLearningModeMainContainer .editCategoryContainer');
+
+        if(flashcard.classList[1] === "flip"){
+            flashcard.classList.remove("flip");
+            flashcard.classList.toggle("firstFlip");
+        }else{
+            flashcard.classList.remove("firstFlip");
+            flashcard.classList.toggle('flip');
+        }
+    }
     
-
     return(
-        <h1>{categoryIndex}</h1>
+        <div className="flashcardLearningModeMainContainer">
+                <div className="editCategoryContainer" onClick={flip}>
+                    <div className="categoryPreview">
+                        <div className="front">
+                            <h1>{currentFlashcard.firstSentence}</h1>
+                        </div>
+                        <div className="back">
+                            <h1>{currentFlashcard.secondSentence}</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="learningFlashcardButtonsContainer">
+                    <div onClick={nextFlashcard}>next</div>
+                </div>
+        </div>
     )
 }

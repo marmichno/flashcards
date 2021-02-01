@@ -121,14 +121,26 @@
     grid-template-rows:repeat(2, 1fr);
 }
 
+@keyframes firstFlip{
+    from{transform: rotateY(180deg);}
+    to{transform: rotateY(0deg);}
+}
+
 @keyframes flip{
     from{transform: rotateY(0);}
     to{transform: rotateY(180deg);}
 }
 
+.firstFlip{
+    transform-style: preserve-3d;
+    transform:perspective(1000px);
+    transition:all 300ms;
+    animation:firstFlip 0.3s ease-in-out forwards;
+}
+
 .flip{
     transform-style: preserve-3d;
-    transform:perspective(1000px) rotateY(180deg);
+    transform:perspective(1000px);
     transition:all 300ms;
     animation:flip 0.3s ease-in-out forwards;
 }
