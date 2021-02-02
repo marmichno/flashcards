@@ -7,19 +7,22 @@ import './categories.css'
 
 export const ShowCategories = () => {
 
+    // sets category for default after deleting category
+    const defaultCategoryIndex = () =>{
+
+        getCategoriesRequest().then(result => {
+            setCategoryIndex(result[0].id);
+        })
+    }
+
     const [flashCardsCategories, setFlashCardsCategories] = useState(""); // saving categories from get request
-    const [categoryIndex, setCategoryIndex] = useState(1);
+    const [categoryIndex, setCategoryIndex] = useState(defaultCategoryIndex());
 
     //show categories get request
     const refreshCategories = async () =>{
         getCategoriesRequest().then(result => {
             setFlashCardsCategories(result);
         });
-    }
-
-    // sets category for default after deleting category
-    const defaultCategoryIndex = () =>{
-        setCategoryIndex(1)
     }
 
     //getting categories on first load

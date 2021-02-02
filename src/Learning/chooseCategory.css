@@ -52,12 +52,12 @@
     height:100%;
     background-color:red;
     font-size:1.5rem;
-    opacity:0.3;
+    opacity:1;
     cursor:pointer;
 }
 
 .learnActive{
-    opacity:1 !important;
+    border: 2px solid #F64C72;
 }
 
 .lastLearning{
@@ -73,7 +73,60 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    background-color:red;
-    opacity:0.3;
+    background-color: rgba(48, 29, 193, 0.78);
+    color:white;
+    opacity:1;
     cursor:pointer;
+}
+
+.learnChooseCategory div div h1{
+    cursor:pointer;
+}
+
+.learnChooseCategoryMainContainer p{
+    width:20%;
+    text-align:center;
+}
+
+@media (max-width: 1550px){
+    .lastLearning{
+        width:30%;
+    }
+}
+
+@media (max-width: 1200px){
+    .learnChooseCategory{
+        width:60%;
+    }
+    .learnChooseCategoryMainContainer p{
+        width:25%;
+    }
+    .lastLearning{
+        width:40%;
+    }
+}
+
+@media (max-width: 850px){
+    .learnChooseCategoryMainContainer p{
+        width:45%;
+    }
+    .learnChooseCategory{
+        width:100%;
+    }
+    .learnChooseCategory select{
+        width:40%;
+    }
+
+    .lastLearning{
+        width:60%;
+    }
+}
+
+@media (max-width: 850px){
+    .lastLearning{
+        width:90%;
+    }
+    .learnChooseCategoryMainContainer p{
+        width:65%;
+    }
 }

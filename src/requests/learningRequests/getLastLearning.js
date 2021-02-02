@@ -10,5 +10,5 @@ export const getLastLearning = async () => {
 
     let request = await fetch("http://localhost:8080/api/learn/last", requestOptions)
     let response = await request;
-    return response.status;
+    return response;
 }

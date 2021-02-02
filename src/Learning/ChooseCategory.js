@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 import {getCategoriesRequest} from '../requests/categoriesRequests/getCategoryRequest';
 import {getLastLearning} from '../requests/learningRequests/getLastLearning';
+import {getFlashcards} from '../requests/flashcardsRequests/getFlashcards';
 import {Link} from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import './chooseCategory.css';
@@ -8,47 +9,62 @@ import './chooseCategory.css';
 export const ChooseCategory = () => {
 
     const [categories, setCategories] = useState("");
-    const [mode, setMode] = useState("");
     const [lastLearning, setLastLearning] = useState(false);
+    const [lastLearningDate, setLastLearningDate] = useState("");
     const [restartProgress, setRestartProgress] = useState(true);
     const [choosenCategory, setChoosenCategory] = useState();
     let history = useHistory(); 
 
+    //saves categories to state
     useEffect(() => {
         getCategoriesRequest().then(result => {
             setCategories(result);
         })
     },[]);
 
+    //sets for the first load category as default
     useEffect(() => {
         if(categories.length > 0){
             setChoosenCategory(categories[0].id);
         }
     }, [categories]);
 
+
+    //checks if user have any previous session with learning
     useEffect(() =>{
         getLastLearning().then(result =>{
-            if(result === 404){
+
+            if(result.status === 404){
                 setLastLearning(false);
             }else{
                 setLastLearning(true);
+
+                setLastLearningDate(() => {
+                    let date = result.createdDateTime.split('');
+                    let arr = [];
+    
+                    for(let i = 0; i < 19; i++){
+                        if(date[i] === "T"){
+                            arr.push(' ');
+                        }else{
+                            arr.push(date[i]);
+                        }
+                    }
+    
+                    return arr.join('');
+                });
             }
+
+            return result.json();
         })
     }, []);
 
+    //saving choosen category from dropdown menu
     const setChoosen = (e) => {
         setChoosenCategory(e.target.options[e.target.selectedIndex].value);
     }
 
-    const selectMode = (e) =>{
-
-        let modes = document.querySelectorAll('.learnChooseMode div');
-        modes.forEach(element => element.classList.remove('learnActive'))
-        e.target.classList.add('learnActive');
-        setMode(e.target.innerHTML);
-
-    }
-
+    //selecting if user would like to continue previous learning session or create new one
     const selectSession = (e) =>{
 
         let session = document.querySelectorAll('.lastLearning div');
@@ -62,28 +78,43 @@ export const ChooseCategory = () => {
         }
     }
 
-    const changeLocation = () => {
+
+    //animation and changing location using router
+    const changeLocation = async () => {
+
         let session = document.querySelectorAll('.lastLearning div');
-        let modes = document.querySelectorAll('.learnChooseMode div');
         let counter = 0;
         session.forEach(result => result.classList.value === "learnActive" ? counter++ : null);
-        modes.forEach(result => result.classList.value === "learnActive" ? counter++ : null);
+
+        let flashcards = await getFlashcards(choosenCategory);
+
+        if(flashcards.status === 404){
+            return null;
+        }
  
-        if(counter === 1 || counter === 2){
+        if(counter === 1 && lastLearning === true){
             const location = {
                 pathname: '/learn-choose-category/learning',
                 state: {
                     categoryIndex:choosenCategory,
-                    restartProgress:restartProgress,
-                    mode:mode
+                    restartProgress:restartProgress
                 }
             }    
             history.push(location);
-        }else{
-            console.log("michal suck ballz");
+
+        }else if(counter === 0 && lastLearning === false){
+            const location = {
+                pathname: '/learn-choose-category/learning',
+                state: {
+                    categoryIndex:choosenCategory,
+                    restartProgress:restartProgress
+                }
+            }    
+            history.push(location);
         }
     }
 
+    //renders if user doesnt have previous learning session
     if(categories.length > 0 && lastLearning === false){
         return(
             <div className="learnChooseCategoryMainContainer">
@@ -99,19 +130,13 @@ export const ChooseCategory = () => {
                     </select>
                 </div>
 
-                <h1>Select learning Mode</h1>
-                <div className="learnChooseMode">
-                    <div onClick={selectMode}>flashcard</div>
-                    <div onClick={selectMode}>typing</div>
-                    <div onClick={selectMode}>one of three</div>
-                </div>
                 <div>
-
-                    <div onClick={changeLocation}>start</div>
-
+                    <div onClick={changeLocation}><h1>start</h1></div>
                 </div>
+
             </div>
         )
+        //renders if user have previous learning session
     }else if(categories.length > 0 && lastLearning === true){
         return(
             <div className="learnChooseCategoryMainContainer">
@@ -126,20 +151,14 @@ export const ChooseCategory = () => {
                         }
                     </select>
                 </div>
-                <p>if you select new session your progress will be lost</p>
+                <p>You can continue to your learning session from <b>{lastLearningDate}</b> or choose new session to restart progress</p>
                 <div className="lastLearning">
                     <div onClick={selectSession}>new learning session</div>
                     <div onClick={selectSession}>last session</div>
                 </div>
-                <h1>Select learning Mode</h1>
-                <div className="learnChooseMode">
-                    <div onClick={selectMode}>flashcard</div>
-                    <div onClick={selectMode}>typing</div>
-                    <div onClick={selectMode}>one of three</div>
-                </div>
+               
                 <div>
-                    <div onClick={changeLocation}>start</div>
-
+                    <div onClick={changeLocation}><h1>start</h1></div>
                 </div>
             </div>
         )

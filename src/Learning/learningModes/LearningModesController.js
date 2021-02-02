@@ -8,10 +8,11 @@ export const LearningModesController = (state) =>{
 
     let categoryIndex = state.location.state.categoryIndex; //categoryIndex from showCategories saved in location state {router}
     let restartProgress = state.location.state.restartProgress;
-    let mode = state.location.state.mode;
 
     let history = useHistory(); 
 
+
+    //restart progress and sets restart to false after first trigger
     useEffect(() => {
         if(restartProgress === true){
             getCategoryFlashcards(categoryIndex).then(result => {
@@ -20,8 +21,7 @@ export const LearningModesController = (state) =>{
                     pathname: '/learn-choose-category/learning',
                     state: {
                         categoryIndex:categoryIndex,
-                        restartProgress:false,
-                        mode:mode
+                        restartProgress:false
                     }
                 }
                 
@@ -34,10 +34,8 @@ export const LearningModesController = (state) =>{
 
     }, [])  
 
-    if(mode === "flashcard"){
         return(
             <Flashcard categoryIndex={categoryIndex}/>
         )
-    }
 
 }

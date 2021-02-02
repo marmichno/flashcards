@@ -6,18 +6,21 @@ export const Flashcard = () => {
 
     const [currentFlashcard, setCurrentFlashcard] = useState(getCurrentFlashcard());
 
+    //handles on click to get new flashcard
     const nextFlashcard = () =>{
         getNextFlashcard().then(result =>{
             setCurrentFlashcard(result);
         })
     }
 
+    //set current (from previous session or first from new session) flashcard
     useEffect(() => {
         getCurrentFlashcard().then(result =>{
             setCurrentFlashcard(result);
         })
     }, []);
 
+    //animation - flipping flashcard on click
     const flip = () =>{
         let flashcard = document.querySelector('.flashcardLearningModeMainContainer .editCategoryContainer');
 

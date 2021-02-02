@@ -38,3 +38,22 @@
 .learningFlashcardButtonsContainer div:nth-child(4){
     font-size:2.5rem;
 }
+
+@media (min-width:1100px) and (max-height:800px){
+    .flashcardLearningModeMainContainer .editCategoryContainer{
+        height:50%;
+    }
+}
+
+@media (max-width:1100px){
+    .flashcardLearningModeMainContainer .editCategoryContainer{
+        width:70%;
+    }
+}
+
+@media (max-width: 700px){
+    .flashcardLearningModeMainContainer .editCategoryContainer{
+        width:90%;
+        height:30%;
+    }
+}
