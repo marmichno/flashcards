@@ -1,16 +1,13 @@
-export const getFlashcards = async(categoryIndex) =>{
+import axios from 'axios';
 
-    let myHeaders = new Headers();
-    myHeaders.append("Authorization", `Basic ` + localStorage.getItem('user'));
-    myHeaders.append("Content-Type", "application/json");
+export const getFlashcards = async (categoryIndex) =>{
 
-        var requestOptions = {
-            method: 'GET',
-            headers: myHeaders,
-            redirect: 'follow'
-          };
-          
-        let request = await fetch(`http://localhost:8080/api/flashcards/category/${categoryIndex}`, requestOptions);
-        let response = await request.json();
-        return response;
+    try{
+      const request = await axios.get(`http://localhost:8080/api/flashcards/category/${categoryIndex}`);
+      const response = await request.data;
+      return response;
+    
+    }catch(error){
+        return error.response;
+    }
 }

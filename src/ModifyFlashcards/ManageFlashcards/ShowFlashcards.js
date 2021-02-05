@@ -15,10 +15,9 @@ let categoryIndex = state.location.state.categoryIndex; //categoryIndex from sho
 
 
     // gets all flashcards / refreshes page after change
-    const refreshFlashcards = () => {
-        getFlashcards(categoryIndex).then(result => {
-            setFlashCards(result);
-        });
+    const refreshFlashcards = async () => {
+        let response = await getFlashcards(categoryIndex);
+            setFlashCards(response);
     }
 
     // setting default flashcard id to first element so after changing categorie flashcardpreview will show first item
@@ -71,7 +70,7 @@ let categoryIndex = state.location.state.categoryIndex; //categoryIndex from sho
             <div className="flashcardPreviewPopup popup">
                 <div className="popupBackground" onClick={showModifyPopup}></div>
                 <div className="flashcardPreviewContainer">
-                        <FlashcardPreview categoryIndex={categoryIndex} flashcards={flashCards} flashcardId={flashcardPreviewId} refreshFlashcards={refreshFlashcards} showModifyPopup={showModifyPopup} emptyContainer={false}/>
+                    <FlashcardPreview categoryIndex={categoryIndex} flashcards={flashCards} flashcardId={flashcardPreviewId} refreshFlashcards={refreshFlashcards} showModifyPopup={showModifyPopup} emptyContainer={false}/>
                 </div>
             </div>
             

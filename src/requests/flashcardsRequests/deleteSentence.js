@@ -1,15 +1,13 @@
-export const deleteSentence = async (id) => {
-    let myHeaders = new Headers();
-    myHeaders.append("Authorization", `Basic ` + localStorage.getItem('user'));
-    myHeaders.append("Content-Type", "application/json");
+import axios from 'axios';
+import {toast} from 'react-toastify';
 
-    var requestOptions = {
-        method: 'DELETE',
-        headers: myHeaders,
-        redirect: 'follow'
-      };
-      
-    let request = await fetch(`http://localhost:8080/api/flashcard/${id}`, requestOptions);
-    let response = await request;
-    return response;
+export const deleteSentence = async (id) => {
+
+  try{
+    await axios.delete(`http://localhost:8080/api/flashcard/${id}`);
+    toast.success('Flashcard deleted');
+  }
+  catch(error){
+    console.log(error);
+  }
 }

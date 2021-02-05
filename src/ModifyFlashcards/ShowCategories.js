@@ -7,26 +7,28 @@ import './categories.css'
 
 export const ShowCategories = () => {
 
-    // sets category for default after deleting category
-    const defaultCategoryIndex = () =>{
-
-        getCategoriesRequest().then(result => {
-            setCategoryIndex(result[0].id);
-        })
-    }
-
     const [flashCardsCategories, setFlashCardsCategories] = useState(""); // saving categories from get request
-    const [categoryIndex, setCategoryIndex] = useState(defaultCategoryIndex());
+    const [categoryIndex, setCategoryIndex] = useState("");
+
+    // sets category for default after deleting category
+    const defaultCategoryIndex = async () =>{
+        let response = await getCategoriesRequest();
+        setCategoryIndex(response[0].id);
+    }
 
     //show categories get request
     const refreshCategories = async () =>{
-        getCategoriesRequest().then(result => {
-            setFlashCardsCategories(result);
-        });
+        let response = await getCategoriesRequest();
+        setFlashCardsCategories(response);
     }
 
-    //getting categories on first load
     useEffect(() =>{
+        console.log(categoryIndex);
+    }, [categoryIndex])
+
+    //getting categories / setting default index on first load
+    useEffect(() =>{
+        defaultCategoryIndex();
         refreshCategories();
     }, [])
 
@@ -46,17 +48,14 @@ export const ShowCategories = () => {
     if(flashCardsCategories.length > 0){
         return(
         <div className="categoriesMainContainer">
-
             <div className="categoriesContainer">   
                 <div className="carousel">
                     <Categories flashCardsCategories={flashCardsCategories} saveCategoryIndex={saveCategoryIndex} refreshCategories={refreshCategories} categoryIndex={categoryIndex}/>
                 </div>
             </div>
-
             <div className="addCategoryContainer">
                 <AddCategory refreshCategories={refreshCategories}/>
             </div>
-
                 <EditCategory categories={flashCardsCategories} categoryIndex={categoryIndex} refreshCategories={refreshCategories} defaultCategory={defaultCategoryIndex}/>
         </div>
         )

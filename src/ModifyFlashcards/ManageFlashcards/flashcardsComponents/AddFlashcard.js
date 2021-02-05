@@ -8,49 +8,24 @@ export const AddFlashcard = ({refreshFlashcards, categoryIndex, emptyContainer})
 
     // saving input text to add new flashcard
     const sentenceOne = (e) => {
-        
-    let firstSentence = document.querySelector('.firstSentenceContainer label span p');
-    let secondSentence = document.querySelector('.secondSentenceContainer label span p');
-
-        if(firstSentence.innerText != "first sentence"){
-            firstSentence.innerText = "first sentence";
-        };
-
         setAddSentenceOne(e.target.value);
     }
 
     // saving second input text to add new flashcard
-    const sentenceTwo = (e) => {          
-        
-    let firstSentence = document.querySelector('.firstSentenceContainer label span p');
-    let secondSentence = document.querySelector('.secondSentenceContainer label span p');
-
-        if(secondSentence.innerText != "second sentence"){
-            secondSentence.innerText = "second sentence";
-        };
-
+    const sentenceTwo = (e) => {              
         setAddSentenceTwo(e.target.value);
     }
 
     // saving sentence combined with two inputs to add to database
     const saveNewSentence = async () => {
 
-        let firstSentence = document.querySelector('.firstSentenceContainer label span p');
-        let secondSentence = document.querySelector('.secondSentenceContainer label span p');
+        const response = await addFlashcard(addSentenceOne, addSentenceTwo, categoryIndex);
 
-        if(addSentenceOne.length < 1){
-            firstSentence.innerText = "cannot be null";
-        }else if(addSentenceTwo.length < 1){
-            secondSentence.innerText = "cannot be null";
-        }else if(addSentenceOne.length > 11){
-            firstSentence.innerText = "sentence too long";
-        }else if(addSentenceTwo.length > 200){
-            secondSentence.innerText = "sentence too long";
-        }else{
-            await addFlashcard(addSentenceOne, addSentenceTwo, categoryIndex);
+        if(response.status === 200){
             refreshFlashcards();
+        }else{
+            return null;
         }
-
     }
 
     

@@ -1,14 +1,15 @@
 import {useState} from 'react';
 import {registerUser} from './registerUser';
+import { useHistory } from "react-router-dom";
 import '../Register/register.css';
+
 
 export const Register = () => {
 
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
     const [repeatPassword, setRepeatPassword] = useState("");
-    const [errorStatus, setErrorStatus] = useState("");
-    const [successRegister, setSuccesRegister] = useState("");
+    const history = useHistory();
 
         //login
         const saveLogin = (e) => {
@@ -27,23 +28,19 @@ export const Register = () => {
 
         const addUser = async () => {
 
-            if(password !== repeatPassword){
-                setErrorStatus("Passwords does not match");
+            let response = await registerUser(login, password, repeatPassword);
+
+            if(response === 400){
+                return null;
+            }
+
+            if(response.status === 200){
+                const location = {
+                    pathname: '/'
+                }    
+                history.push(location);
             }else{
-
-                let response = await registerUser(login, password);
-                
-                if(response.status === 409){
-                    setErrorStatus("User with this login already exists");
-                }else if(response.status === 400){
-                    setErrorStatus("Login and password has to be at least 5 symbols long and cant be longer than 20 symbols");
-                }else if(response.status === 200){
-                    setSuccesRegister("Account has been created, you may login now");
-                    setTimeout(() =>{
-                        window.location = "/"
-                    }, 1000);
-                }
-
+                return null;
             }
         }
 
@@ -52,7 +49,6 @@ export const Register = () => {
         <div className="registerMainContainer">
 
             <div className="registerForm">
-
 
             <div className="registerFormContainer">
                 <div className="firstSentenceContainer formContainer">
@@ -75,8 +71,6 @@ export const Register = () => {
                         <span className="contentName"><p>Repeat password</p></span>
                     </label>
                 </div>
-                <p className="error">{`${errorStatus}`}</p>
-                <p className="success">{`${successRegister}`}</p>
             </div>
 
                 <div className="registerIconContainer">

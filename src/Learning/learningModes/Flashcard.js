@@ -7,17 +7,16 @@ export const Flashcard = () => {
     const [currentFlashcard, setCurrentFlashcard] = useState(getCurrentFlashcard());
 
     //handles on click to get new flashcard
-    const nextFlashcard = () =>{
-        getNextFlashcard().then(result =>{
-            setCurrentFlashcard(result);
-        })
+    const nextFlashcard = async () =>{
+        let request = await getNextFlashcard();
+        setCurrentFlashcard(request);
     }
 
     //set current (from previous session or first from new session) flashcard
-    useEffect(() => {
-        getCurrentFlashcard().then(result =>{
-            setCurrentFlashcard(result);
-        })
+    useEffect( async () => {
+        let request = await getCurrentFlashcard();
+        console.log(request);
+        setCurrentFlashcard(request);
     }, []);
 
     //animation - flipping flashcard on click

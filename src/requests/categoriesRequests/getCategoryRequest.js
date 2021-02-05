@@ -1,14 +1,13 @@
-export const getCategoriesRequest = async () => {
-    let myHeaders = new Headers();
-    myHeaders.append("Authorization", `Basic ` + localStorage.getItem('user'));
+import axios from 'axios';
 
-    var requestOptions = {
-        method: 'GET',
-        headers: myHeaders,
-        redirect: 'follow'
-    };
+export const getCategoriesRequest = async () => {
+
+    try{
+    const request = await axios.get('http://localhost:8080/api/categories');
+    let response = await request;
+    return response.data
     
-    let request = await fetch("http://localhost:8080/api/categories", requestOptions);
-    let response = await request.json();
-    return response;
+    }catch(error){
+        console.log(error);
+    }
 }

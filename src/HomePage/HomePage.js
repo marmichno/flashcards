@@ -9,19 +9,18 @@ export const HomePage = () => {
 
     const [userLogin, setUserLogin] = useState("");
     const [userPassword, setUserPassword] = useState("");
-    const [loginError, setLoginError] = useState("");
     const loginState = useSelector(state => state.isLogged);
     const dispatch = useDispatch();
 
     //running loginRequest
     const tryToLogin = async () => {
         let response = await loginRequest(userLogin, userPassword);
-            if(response.status === 200){
-                dispatch(login());
-                setLoginError("");
-            }else if(response.status === 401){
-                setLoginError("Incorrect login or password");
-            }
+
+        if(response.status === 200){
+            dispatch(login());
+        }else{
+            return null;
+        }
     }
 
     //saving user login input to state
@@ -94,7 +93,6 @@ export const HomePage = () => {
                             </div>
 
                             <p>Don't have account already? Click <span className="homeRegister"><a href="/register">here</a></span> to register</p>
-                            <p className="error">{`${loginError}`}</p>
                         </div>
                     </div>
                 </div>

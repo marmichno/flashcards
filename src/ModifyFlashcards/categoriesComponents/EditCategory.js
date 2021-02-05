@@ -11,6 +11,7 @@ export const EditCategory = ({categories, categoryIndex, refreshCategories, defa
 
     //saves category index / resets to default after deleting category
     let categoryToPreview = categories.filter(value => {
+
         if(value.id === parseInt(categoryIndex)){
             return true;
         }else{
@@ -36,28 +37,32 @@ export const EditCategory = ({categories, categoryIndex, refreshCategories, defa
         previewContainer.classList.toggle('displaynone');
     }
 
-    return(
-            <div className="categoryModifyPopup popup">
-                <div className="popupBackground" onClick={showModifyCategoryPopup}></div>
-                <div key={categoryIndex} className="editCategoryContainer flip">
-                    <div className="categoryPreview">
-                        <div className="front">
-                        </div>
-                        <div className="back">
-                            <h1>{categoryToPreview.categoryName}</h1>
-                        </div>
-                    </div>
-
-
-                        <div className="categoryModifyInput">
-                            <div className="categoryModifyInputContainer">
-                                <input placeholder={`from ${categoryToPreview.categoryName}`} onChange={saveCategoryName}></input>
-                                <div onClick={changeCategoryName}>change name</div>
+    if(categoryToPreview !== undefined){
+        return(
+                <div className="categoryModifyPopup popup">
+                    <div className="popupBackground" onClick={showModifyCategoryPopup}></div>
+                    <div key={categoryIndex} className="editCategoryContainer flip">
+                        <div className="categoryPreview">
+                            <div className="front">
+                            </div>
+                            <div className="back">
+                                <h1>{categoryToPreview.categoryName}</h1>
                             </div>
                         </div>
-                    </div>
-                <DeleteCategory categoryIndex={categoryIndex} refreshCategories={refreshCategories} defaultCategory={defaultCategory}/>
-                <ShowCategoryFlashcards categoryIndex={categoryIndex}/>
-        </div>
-    )
+
+
+                            <div className="categoryModifyInput">
+                                <div className="categoryModifyInputContainer">
+                                    <input placeholder={`from ${categoryToPreview.categoryName}`} onChange={saveCategoryName}></input>
+                                    <div onClick={changeCategoryName}>change name</div>
+                                </div>
+                            </div>
+                        </div>
+                    <DeleteCategory categoryIndex={categoryIndex} refreshCategories={refreshCategories} defaultCategory={defaultCategory}/>
+                    <ShowCategoryFlashcards categoryIndex={categoryIndex}/>
+            </div>
+        )
+    }else{
+        return null
+    }
 }

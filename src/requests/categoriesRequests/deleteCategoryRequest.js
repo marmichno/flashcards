@@ -1,13 +1,18 @@
-export const deleteCategoryRequest = async (id) =>{
-    let myHeaders = new Headers();
-    myHeaders.append("Authorization", `Basic ` + localStorage.getItem('user'));
-    myHeaders.append("Content-Type", "application/json");
+import axios from 'axios';
+import {toast} from 'react-toastify';
 
-    let requestOptions = {
-        method: 'DELETE',
-        headers: myHeaders,
-        redirect: 'follow'
-      };
-      
-    await fetch(`http://localhost:8080/api/category/${id}`, requestOptions);
+export const deleteCategoryRequest = async (id) =>{
+
+  try{
+    await axios.delete(`http://localhost:8080/api/category/${id}`);
+    toast.success('Category deleted');
+  }
+  catch(error){
+    let code = error.response.status;
+
+    if(code === 409){
+      toast.error('You cant modify default category');
+    }
+  }
+
 }

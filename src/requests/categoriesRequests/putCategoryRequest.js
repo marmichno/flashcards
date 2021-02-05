@@ -1,18 +1,26 @@
+import axios from 'axios';
+import {toast} from 'react-toastify';
+
 export const putCategoryRequest = async (id, categoryName) => {
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization", `Basic ` + localStorage.getItem('user'));
-    myHeaders.append("Content-Type", "application/json");
 
-    var raw = JSON.stringify(`${categoryName}`);
+    const config = {
+        headers: {
+                "Content-Type": "application/json"
+        }
+    }
 
-    console.log(categoryName, id);
+    try{
+    await axios.put(`http://localhost:8080/api/category/${id}`, JSON.stringify(categoryName) , config);
+    toast.success('Category was modified');
 
-    var requestOptions = {
-    method: 'PUT',
-    headers: myHeaders,
-    body: raw,
-    redirect: 'follow'
-    };
+    }catch(error){
+        console.log(error);
+        let code = error.response.status;
 
-   await fetch(`http://localhost:8080/api/category/${id}`, requestOptions);
+        if(code === 409){
+            toast.error('You cant modify default category');
+        }else if(code === 400){
+            toast.error('Name too short/too long');
+        }
+    }
 }

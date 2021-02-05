@@ -2,9 +2,10 @@ import {useState, useEffect} from 'react';
 import {getCategoriesRequest} from '../requests/categoriesRequests/getCategoryRequest';
 import {getLastLearning} from '../requests/learningRequests/getLastLearning';
 import {getFlashcards} from '../requests/flashcardsRequests/getFlashcards';
-import {Link} from 'react-router-dom';
+import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import './chooseCategory.css';
+import { toast } from 'react-toastify';
 
 export const ChooseCategory = () => {
 
@@ -13,7 +14,7 @@ export const ChooseCategory = () => {
     const [lastLearningDate, setLastLearningDate] = useState("");
     const [restartProgress, setRestartProgress] = useState(true);
     const [choosenCategory, setChoosenCategory] = useState();
-    let history = useHistory(); 
+    const history = useHistory(); 
 
     //saves categories to state
     useEffect(() => {
@@ -31,32 +32,31 @@ export const ChooseCategory = () => {
 
 
     //checks if user have any previous session with learning
-    useEffect(() =>{
-        getLastLearning().then(result =>{
+    useEffect( async () =>{
+        const request = await getLastLearning();
+        const response = await request;
 
-            if(result.status === 404){
-                setLastLearning(false);
-            }else{
-                setLastLearning(true);
+        if(response.status === 404){
+            setLastLearning(false);
+        }else{
+            setLastLearning(true);
 
-                setLastLearningDate(() => {
-                    let date = result.createdDateTime.split('');
-                    let arr = [];
+            setLastLearningDate(() => {
+                let date = response.data.createdDateTime.split('');
+                let arr = [];
     
-                    for(let i = 0; i < 19; i++){
-                        if(date[i] === "T"){
-                            arr.push(' ');
-                        }else{
-                            arr.push(date[i]);
-                        }
+                for(let i = 0; i < 19; i++){
+                    if(date[i] === "T"){
+                        arr.push(' ');
+                    }else{
+                        arr.push(date[i]);
                     }
+                }
     
-                    return arr.join('');
+                return arr.join('');
                 });
             }
-
-            return result.json();
-        })
+            return response;
     }, []);
 
     //saving choosen category from dropdown menu
@@ -89,6 +89,7 @@ export const ChooseCategory = () => {
         let flashcards = await getFlashcards(choosenCategory);
 
         if(flashcards.status === 404){
+            toast.error('Category doesnt contain any flashcards');
             return null;
         }
  

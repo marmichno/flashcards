@@ -8,6 +8,12 @@ import {ChooseCategory} from './Learning/ChooseCategory';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import {login} from './actions';
+import axios from 'axios';
+import {toast, ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
+toast.configure();
 
 function App() {
 
@@ -15,11 +21,15 @@ function App() {
   let isUserLoggedIn = localStorage.getItem('user');
 
   if(isUserLoggedIn !== null){
-    dispatch(login())
+    dispatch(login());
+    axios.defaults.headers.common['Authorization'] = `Basic ` + localStorage.getItem('user');
   }
 
     return(
         <Router>
+          <ToastContainer
+          position="bottom-left"
+          />
           <Nav/>
           <Switch>
             <Route path="/" exact component={HomePage}/>
