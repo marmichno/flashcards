@@ -12,6 +12,7 @@ Frontend implementation off backend running on java https://github.com/Siencode/
 
 ## Tech
 
+- css
 - react
 - redux - state managmnet
 - axios - handling request
