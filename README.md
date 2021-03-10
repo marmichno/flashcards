@@ -16,6 +16,7 @@ Frontend implementation off backend running on java https://github.com/Siencode/
 - redux - state managmnet
 - axios - handling request
 - toastify - server response nortifications
+- react router -  declarative routing
 
 
 ## Installation
